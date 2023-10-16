@@ -9,7 +9,7 @@ import pandas as pd
 import cmasher as cmr
 
 df = pd.read_table('table.dat', sep=',', skiprows=2, index_col=0)
-df.drop(df.columns[[-1, -2]], axis=1, inplace=True)
+print(df)
 
 # Create the 'prob' variable to contain the problem data
 prob = LpProblem("Diet Problem", LpMinimize)
