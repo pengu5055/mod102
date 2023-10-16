@@ -1,0 +1,65 @@
+# FILEPATH ./Data/basic_con.toml
+
+[Constraints]
+    name = "Basic Constraints"
+    description = "Basic constraints for a healthy diet"
+
+[Constraints.MassLimit]
+    name = "Max intake of mass"
+    min = 0
+    max = 2000
+    unit = "g"
+
+[Constraints.Fats]
+    name = "Fats"
+    min = 70
+    max = inf
+    unit = "g"
+
+[Constraints.Carbs]
+    name = "Carbs"
+    min = 310
+    max = inf
+    unit = "g"
+
+[Constraints.Protein]
+    name = "Protein"
+    min = 50
+    max = inf
+    unit = "g"
+
+[Constraints.Calories]
+    name = "Calories"
+    min = 0
+    max = 2000
+    unit = "kcal"
+
+[Constraints.Calcium]
+    name = "Calcium"
+    min = 1000
+    max = inf
+    unit = "mg"
+
+[Constraints.Iron]
+    name = "Iron"
+    min = 18
+    max = inf
+    unit = "mg"
+
+[Constraints.VitaminC]
+    name = "VitaminC"
+    min = 60
+    max = inf
+    unit = "mg"
+
+[Constraints.Sodium]
+    name = "Sodium"
+    min = 500
+    max = 2400
+    unit = "mg"
+
+[Constraints.Potassium]
+    name = "Potassium"
+    min = 3500
+    max = inf
+    unit = "mg"
