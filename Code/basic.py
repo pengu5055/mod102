@@ -32,7 +32,8 @@ prob += lpSum([df.loc[i, 'Fe[mg]'] * food_vars[i] for i in food_items]) >= 18, "
 # TODO: Add mass limit
 # But this limitless diet provides an interesting result as in driking a lot of mineral water
 
-prob.writeLP("diet-model_no-weight-con.lp")
+model_name = "diet-model_no-weight-con.lp"
+prob.writeLP(f"Models/{model_name}")
 
 # Slove the problem
 prob.solve()
@@ -44,3 +45,10 @@ print("Status:", LpStatus[prob.status])
 for v in prob.variables():
     print(v.name, "=", v.varValue)
 print("Total energy intake per person = ", value(prob.objective))
+
+# Save the solution to a file with numpy
+var_names = np.array([v.name for v in prob.variables()])
+var_values = np.array([v.varValue for v in prob.variables()])
+solution = np.column_stack((var_names, var_values))
+
+np.savetxt(f"Solutions/{model_name}-sol.dat", solution, delimiter=",", fmt="%s", header="Variable,Value")
