@@ -26,11 +26,13 @@ prob += lpSum([df.loc[i, 'Energija[kcal]'] * food_vars[i] for i in food_items]),
 # And now we can add the constraints
 prob += lpSum([df.loc[i, 'Mascobe[g]'] * food_vars[i] for i in food_items]) >= 70, "FatRequirement"
 prob += lpSum([df.loc[i, 'Ogljikovi_Hidrati[g]'] * food_vars[i] for i in food_items]) >= 310, "CarbohydrateRequirement"
-prob += lpSum([df.loc[i, 'Beljakovine[g]'] * food_vars[i] for i in food_items]) >= 50, "ProteinRequirement"
+prob += lpSum([df.loc[i, 'Proteini[g]'] * food_vars[i] for i in food_items]) >= 50, "ProteinRequirement"
 prob += lpSum([df.loc[i, 'Ca[mg]'] * food_vars[i] for i in food_items]) >= 1000, "CalciumRequirement"
 prob += lpSum([df.loc[i, 'Fe[mg]'] * food_vars[i] for i in food_items]) >= 18, "IronRequirement"
+# TODO: Add mass limit
+# But this limitless diet provides an interesting result as in driking a lot of mineral water
 
-prob.writeLP("DietProblem_Model.lp")
+prob.writeLP("diet-model_no-weight-con.lp")
 
 # Slove the problem
 prob.solve()
