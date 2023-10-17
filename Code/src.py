@@ -90,8 +90,8 @@ def plot_category_sankey(output_filename, model_data, food_database, constraints
 
     fig = hv.Sankey((edges, nodes), ['From', 'To'], vdims=value_dim).opts(
         opts.Sankey(cmap="bmy", labels="label", label_position='right',
-                     edge_color=dim('To').str(), fig_size=300,
-                     node_color=dim('index').str())
+                     edge_color=dim('To').str(), fig_size=700, label_text_font_size='22',
+                     node_color=dim('index').str(), )
     )
 
 
