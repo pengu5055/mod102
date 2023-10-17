@@ -57,8 +57,9 @@ Strange (backup category for items that do not fit into any of the above categor
                   
 Map the 429 categories to the 12 categories. You are NOT allowed to make up any more categories
 than the ones I've given you. Make sure that each category is mapped to exactly one of the 12 
-categories. The mapping should be a Python dictionary with the 429 categories as keys and the 12 
-categories as values. For example anything related to Desserts should be mapped to the category
+categories. The mapping should be a comma delimited file with the 429 categories as rows and the 12 
+categories as values for the second column where the category is specified. The first one is for the original
+category name. For example anything related to Desserts should be mapped to the category
 "Sugar and sugar products". 
 
 Here is the list of 429 categories:
