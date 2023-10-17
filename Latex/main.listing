@@ -1,0 +1,4 @@
+    from pulp import *
+
+    # Create the "prob"  variable to contain the problem data
+    prob = LpProblem("Diet Problem", LpMinimize)

@@ -13,9 +13,22 @@
 \usepackage[table,xcdraw]{xcolor}
 \setlength\parindent{0pt}
 
+\usepackage{minted}
+\usepackage{listings}
+\usepackage{tcolorbox}
+\tcbuselibrary{listings, minted, skins}
+
 \newcommand{\ddd}{\mathrm{d}}
 \newcommand\myworries[1]{\textcolor{red}{#1}}
 \newcommand{\Dd}[3][{}]{\frac{\ddd^{#1} #2}{\ddd #3^{#1}}}
+
+\newtcblisting{pythonlst}{listing only, minted language=python3, minted style=paraiso-dark,
+    colback=bg, enhanced, frame hidden, minted options={, 
+    fontsize=\footnotesize, tabsize=2, breaklines, autogobble}}
+
+\definecolor{inline}{RGB}{187,57,82}
+\definecolor{bg}{RGB}{22,43,58}
+\setminted[python3]{bgcolor=bg, fontsize=\footnotesize}
 
 \begin{document}
 \begin{titlepage}
@@ -49,7 +62,7 @@ Linearna optimizacija je zadnje čase zelo vroča tema, tako da me veseli, da se
 Linearno programiranje oz. linearna optimizacija je metoda za iskanje maksimuma ali minimuma linearnega izraza,
 ki je podvržen linearnim omejitvam. Omenjen linearni izraz je funkcija več spremenljivk, ki najpogosteje ovrednoti
 oz. oceni neko količino, ki jo želimo optimizirati. To je lahko npr. dobiček, strošek, količina proizvodnje, itd.
-zato to funkcijo imenujemo \textit{cost function} oz. \textit{objective function}. Linearno programiranje je torej
+zato to funkcijo imenujemo \texttt{cost function} oz. \texttt{objective function}. Linearno programiranje je torej
 metoda, ki nam omogoča, da z linearno funkcijo in linearnimi omejitvami poiščemo optimalno rešitev. Uporablja v 
 različnih panogah, kot so ekonomija, logistika, telekomunikacije, transport, kot pa tudi v znanosti, kot je npr. 
 fizika. \\
@@ -73,15 +86,64 @@ in set vezi, ki so pogosto izražene kot neenačbe:
 \end{equation}
 
 To je pravzaprav to kar se tiče matematičnega opisa osnovnega problema. Seveda so potem izvedenke postopkov
-oz. algoritmov malo bolj zapletene, ampak to žal ni namen te naloge. 
+oz. algoritmov malo bolj zapletene, ampak to žal ni namen te naloge. \\
 
-
-
+Dotično pri tej nalogi si bomo pogledali problem optimizacije diete. Posebna omemba ni potrebna, kako 
+pomembno je to, da se prehranjujemo zdravo in uravnoteženo. Vendar pa je to v današnjem času vse težje,
+saj je na voljo ogromno različnih živil, ki so vse prej kot zdrava. Zato je toliko bolj pomembno, da
+se zavedamo, kaj jemo in da se prehranjujemo zdravo. Vendar pa je to včasih težko, saj je veliko ljudi
+prezaposlenih in nimajo časa, da bi se ukvarjali s tem. Skratka ideja je taka, da bomo za dane želje 
+kar se tiče hranilnih snovi, poskusili najti optimalno dieto. Optimalno pa je tu mišljeno v tem smislu,
+kot ga uporabnik določi. Zagotovo bo razlika med tem, ali se minimizira količina hrane, ki jo je potrebno
+pojesti, cena hrane, količina določene hranilne snovi ali pa kalorična vrednost. 
 
 \section{Naloga}
+Naloga torej zahteva, da za dano tabelo živil in njihovih hranilnih vrednosti, najdemo optimalno dieto, kjer minimiziramo
+kalorije, če zahtevamo sledeče:
+
+\begin{enumerate}
+    \item \begin{itemize}
+        \item Vsaj 70 g maščob
+        \item Vsaj 310 g ogljikovih hidratov
+        \item Vsaj 50 g proteinov
+        \item Vsaj 1000 mg kalcija
+        \item Vsaj 18 mg železa
+        \item Dnevni obroki naj ne presežejo 2000 g
+    \end{itemize}
+
+    Ta osnovni model lahko potem nadgradimo s tem da dodamo še:
+    \begin{itemize}
+        \item Vsaj 60 mg Vitamina C
+        \item Vsaj 3500 mg Kalija
+        \item Med 500 mg in 2400 mg Natrija
+    \end{itemize}
+
+    \item Potem pa poglejmo kako se rezultat razlikuje še zahtevamo vsaj $2000$ kcal in minimiziramo
+    vnos maščob.
+
+    \item Minimizirajmo zdaj ceno diete
+    \item Dodatne izvedbe omejitev za izboljšave uravnoteženosti diete
+
+\end{enumerate}
 
 \section{Opis reševanja}
+Reševanja sem se lotil v klasično v Pythonu. Pri tej nalogi je močno prišel v upoštev 
+pythonian princip, da za vse že obstaja neka knjižnica. In res je tako, za reševanje linearne 
+optimizacije obstaja knjižnica \texttt{PuLP}, ki je zelo enostavna za uporabo in ima še kar solidno 
+dokumentacijo. Pravzaprav je njihov prvi demonstracijski zgled zelo podoben našemu, z razliko da oni
+mešajo meso v mačji hrani. Poleg tega pa seveda pridejo zraven še standardni \texttt{numpy}, \texttt{pandas}
+in tokrat zaradi malo alterative izbire vizualizacije še \texttt{holoviews}. \\
 
+Kot sem že omenil, je knjižnica \texttt{PuLP} zelo enostavna za uporabo. Lahko na hitro povzamem postopek
+ker tako ali tako trenutno čakam, da se mi predprocesirajo podatki za (hopefully uspe) zadnji del naloge.
+Torej začnemo s tem da uvozimo knjižnico in definiramo problem. 
+
+\begin{pythonlst}
+    from pulp import *
+
+    # Create the "prob"  variable to contain the problem data
+    prob = LpProblem("Diet Problem", LpMinimize)
+\end{pythonlst}
 \section{Rezultati}
 
 
