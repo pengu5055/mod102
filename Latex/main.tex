@@ -134,16 +134,92 @@ dokumentacijo. Pravzaprav je njihov prvi demonstracijski zgled zelo podoben naš
 mešajo meso v mačji hrani. Poleg tega pa seveda pridejo zraven še standardni \texttt{numpy}, \texttt{pandas}
 in tokrat zaradi malo alterative izbire vizualizacije še \texttt{holoviews}. \\
 
+
+\subsection{\texttt{PuLP}: basic cookbook}
 Kot sem že omenil, je knjižnica \texttt{PuLP} zelo enostavna za uporabo. Lahko na hitro povzamem postopek
 ker tako ali tako trenutno čakam, da se mi predprocesirajo podatki za (hopefully uspe) zadnji del naloge.
 Torej začnemo s tem da uvozimo knjižnico in definiramo problem. 
 
 \begin{pythonlst}
     from pulp import *
+    import pandas as pd
 
     # Create the "prob"  variable to contain the problem data
     prob = LpProblem("Diet Problem", LpMinimize)
 \end{pythonlst}
+
+Sledi nalaganje podatkov iz tabele živil in ustvarjanje spremenljivk. Spremenljivke so v tem primeru
+količina živila, ki ga bomo pojedli. 
+
+\begin{pythonlst}
+    df = pd.read_table('Data/table.dat', sep=',', skiprows=2, index_col=0)
+
+    # Create a list of the food items
+    food_items = list(df.index)
+
+    # Create variables. These variables are the amounts of each food item to buy
+    food_vars = LpVariable.dicts("Food", food_items, lowBound=0, cat='Continuous')
+\end{pythonlst}
+
+Okay sedaj pa definiramo še našo cost funkcijo. V tem osnovnem primeru bo to količina kalorij, ki jih
+bomo zaužili.
+
+\begin{pythonlst}
+    # Define objective function and add it to the problem
+    prob += lpSum([df.loc[i, 'Energija[kcal]'] * food_vars[i] for i in food_items]), "Total energy intake per person"
+\end{pythonlst}
+
+Zelo praktično je, da v bistvu kar prištevamo izraze k našemu problemu. Tako lahko zelo enostavno dodajamo
+vezi. Storimo to.
+
+\begin{pythonlst}
+    # And now we can add the constraints
+    prob += lpSum([df.loc[i, 'Mascobe[g]'] * food_vars[i] for i in food_items]) >= 70, "FatRequirement"
+    prob += lpSum([df.loc[i, 'Ogljikovi_Hidrati[g]'] * food_vars[i] for i in food_items]) >= 310, "CarbohydrateRequirement"
+    prob += lpSum([df.loc[i, 'Proteini[g]'] * food_vars[i] for i in food_items]) >= 50, "ProteinRequirement"
+    prob += lpSum([df.loc[i, 'Ca[mg]'] * food_vars[i] for i in food_items]) >= 1000, "CalciumRequirement"
+    prob += lpSum([df.loc[i, 'Fe[mg]'] * food_vars[i] for i in food_items]) >= 18, "IronRequirement"
+    prob += lpSum([100 * food_vars[i] for i in food_items]) <= 2000, "MassLimit"
+\end{pythonlst}
+
+Zdaj ko smo model tako lepo definirali je smiselno, da ga tudi spravimo v datoteko. Nato pa kličemo 
+reševanje. \texttt{PuLP} bo sam poskrbel za izbiro algoritma, ki bo najbolj primeren za naš problem.
+
+\begin{pythonlst}
+    model_name = "diet-model_no-weight-con.lp"
+    prob.writeLP(f"Models/{model_name}")
+
+    # Slove the problem
+    prob.solve()
+\end{pythonlst}
+
+In na koncu še spravimo rešitev v neko obliko, ki jo lahko potem uporabimo za vizualizacijo.
+
+\begin{pythonlst}
+    # Save the solution to a file with numpy
+    var_names = np.array([v.name for v in prob.variables()])
+    var_values = np.array([v.varValue for v in prob.variables()])
+    solution = np.column_stack((var_names, var_values))
+
+    np.savetxt(f"Solutions/{model_name}-sol.dat", solution, delimiter=",", fmt="\%s", header="Item,Value")
+\end{pythonlst}
+
+Če bi nas zanimalo še takojšnje ovrednotenje lahko z spodnjim blokom kode izpišemo nekaj uporabnih
+informacij.
+
+\begin{pythonlst}
+    # Print the status of the solution
+    print("Status:", LpStatus[prob.status])
+
+    # Print the optimal solution
+    for v in prob.variables():
+        print(v.name, "=", v.varValue)
+    print("Total energy intake per person = ", value(prob.objective))
+\end{pythonlst}
+
+Od tod naprej pa lahko poljubno zapletemo vezi (dokler ostanejo linearne seveda) ali pa spremenimo
+vhodne podatke. \\
+
 \section{Rezultati}
 
 

@@ -1,0 +1,7 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{model\PYGZus{}name} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}diet\PYGZhy{}model\PYGZus{}no\PYGZhy{}weight\PYGZhy{}con.lp\PYGZdq{}}
+\PYG{n}{prob}\PYG{o}{.}\PYG{n}{writeLP}\PYG{p}{(}\PYG{l+s+sa}{f}\PYG{l+s+s2}{\PYGZdq{}Models/}\PYG{l+s+si}{\PYGZob{}}\PYG{n}{model\PYGZus{}name}\PYG{l+s+si}{\PYGZcb{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} Slove the problem}
+\PYG{n}{prob}\PYG{o}{.}\PYG{n}{solve}\PYG{p}{()}
+\end{Verbatim}

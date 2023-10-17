@@ -1,0 +1,4 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZsh{} Define objective function and add it to the problem}
+\PYG{n}{prob} \PYG{o}{+=} \PYG{n}{lpSum}\PYG{p}{([}\PYG{n}{df}\PYG{o}{.}\PYG{n}{loc}\PYG{p}{[}\PYG{n}{i}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}Energija[kcal]\PYGZsq{}}\PYG{p}{]} \PYG{o}{*} \PYG{n}{food\PYGZus{}vars}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]} \PYG{k}{for} \PYG{n}{i} \PYG{o+ow}{in} \PYG{n}{food\PYGZus{}items}\PYG{p}{]),} \PYG{l+s+s2}{\PYGZdq{}Total energy intake per person\PYGZdq{}}
+\end{Verbatim}

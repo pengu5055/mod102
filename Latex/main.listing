@@ -1,4 +1,7 @@
-    from pulp import *
+    # Print the status of the solution
+    print("Status:", LpStatus[prob.status])
 
-    # Create the "prob"  variable to contain the problem data
-    prob = LpProblem("Diet Problem", LpMinimize)
+    # Print the optimal solution
+    for v in prob.variables():
+        print(v.name, "=", v.varValue)
+    print("Total energy intake per person = ", value(prob.objective))

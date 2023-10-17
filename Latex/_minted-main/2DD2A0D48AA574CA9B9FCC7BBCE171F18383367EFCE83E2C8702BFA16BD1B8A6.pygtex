@@ -1,5 +1,6 @@
 \begin{Verbatim}[commandchars=\\\{\}]
 \PYG{k+kn}{from} \PYG{n+nn}{pulp} \PYG{k+kn}{import} \PYG{o}{*}
+\PYG{k+kn}{import} \PYG{n+nn}{pandas} \PYG{k}{as} \PYG{n+nn}{pd}
 
 \PYG{c+c1}{\PYGZsh{} Create the \PYGZdq{}prob\PYGZdq{}  variable to contain the problem data}
 \PYG{n}{prob} \PYG{o}{=} \PYG{n}{LpProblem}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}Diet Problem\PYGZdq{}}\PYG{p}{,} \PYG{n}{LpMinimize}\PYG{p}{)}
