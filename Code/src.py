@@ -65,12 +65,23 @@ def plot_category_sankey(output_filename, model_data, food_database, constraints
 
         categories_mass[i] = mass
 
-    nodes = np.array(["Full diet", *categories, *model_data_select.index.tolist()])
-    nodes = hv.Dataset(enumerate(nodes), 'index', 'label')
+    food_items = model_data_select.index.tolist()
+    nodes_in = np.array(["Full diet", *categories, *food_items])
+    nodes = hv.Dataset(enumerate(nodes_in), 'index', 'label')
 
-    edges = [ 
+    edges_lyr1 = [
         (0, i + 1, categories_mass[i]) for i in range(len(categories))
     ]
+
+    edges_lye2 = []
+    for i, category in enumerate(categories):
+        items = [item for item in model_data_select.index.tolist() if food_database.loc[item, "Category"] == category]
+        for item in items:
+            edges_lye2.append((i + 1, list(nodes_in).index(item) , 100 * model_data_select.loc[item, "Value"]))
+
+    edges = [*edges_lyr1, *edges_lye2]
+
+    print(edges)
     #+ [
     #    (len(model_data.index) + i, len(model_data.index) + len(categories)) for i in range(len(model_data.index))
     #]
@@ -78,10 +89,10 @@ def plot_category_sankey(output_filename, model_data, food_database, constraints
     value_dim = hv.Dimension('Weight', label='Weight', unit='g')
 
     fig = hv.Sankey((edges, nodes), ['From', 'To'], vdims=value_dim).opts(
-        opts.Sankey(cmap="cmr.nuclear", labels="label", label_position='right',
+        opts.Sankey(cmap="bmw", labels="label", label_position='right',
                      edge_color=dim('To').str(), fig_size=300,
                      node_color=dim('index').str())
     )
 
 
-    hv.save(fig, "test.png")
+    hv.save(fig, f"Images/{output_filename}.png")
