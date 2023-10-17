@@ -23,19 +23,25 @@ desired_cols = ["id", "name", "unit_name"]
 nutrient = pd.read_table("Data/FoodData/nutrient.csv", sep=',', usecols=desired_cols, index_col=0)
 
 # Load category to group mapping
-# category_to_group = pd.read_table("Data/categories-to-groups.map", sep=',', index_col=0).to_dict()
+desired_cols = ["category", "group"]
+category_to_group = pd.read_table("Data/categories-to-groups.map", sep='\t\t', names=["category", "group"], index_col=0)
 
-# print(category_to_group)
-# print(len(category_to_group.keys()))
+# Pair the category names with the group names
+category_to_group_map = category_to_group.to_dict()["group"]
 
 # Now replace the category names with the group names
-# branded_food["branded_food_category"] = branded_food["branded_food_category"].map(category_to_group)
+branded_food["branded_food_category"] = branded_food["branded_food_category"].replace(category_to_group_map)
 
 # food_nutrient codes to nutrient names
 food_nutrient["nutrient_id"] = food_nutrient["nutrient_id"].map(nutrient["name"])
 
-# Combine the dataframes into one master dataframe where all data is interpreted:
-#   For each item in food we need to check for each nutrient in food_nutrient and add it as a column
-#   to the food dataframe. We also add the category and brand owner to the food dataframe.
+# Add column with brand owner
+food_nutrient["brand_owner"] = food_nutrient.index.map(branded_food["brand_owner"])
+
+# food_nutrient codes to food names
+food_nutrient.index = food_nutrient.index.map(food["description"])
+
+# Now gather all duplications of the id column and append the nutrient_id and amount columns
+food_nutrient = food_nutrient.groupby(food_nutrient.index).agg({"nutrient_id": lambda x: list(x), "amount": lambda x: list(x), "brand_owner": lambda x: list(x)})
 
 print(food_nutrient.head())
