@@ -44,4 +44,25 @@ food_nutrient.index = food_nutrient.index.map(food["description"])
 # Now gather all duplications of the id column and append the nutrient_id and amount columns
 food_nutrient = food_nutrient.groupby(food_nutrient.index).agg({"nutrient_id": lambda x: list(x), "amount": lambda x: list(x), "brand_owner": lambda x: list(x)})
 
-print(food_nutrient.head())
+# Now for each row create columns for each nutrient_id and amount
+# First we need to find all unique nutrient_ids
+unique_nutrient_ids = np.unique(np.array([item for sublist in food_nutrient["nutrient_id"].tolist() for item in sublist]))
+
+# It is necessary to use DataFrame operations since the data is so massive
+# First create a DataFrame of zeros
+food_nutrient_expanded = pd.DataFrame(0.0, index=food_nutrient.index, columns=unique_nutrient_ids)
+
+# Now fill the DataFrame with the values from the food_nutrient DataFrame
+for i, row in food_nutrient.iterrows():
+    for nutrient_id, amount in zip(row["nutrient_id"], row["amount"]):
+        food_nutrient_expanded.loc[i, nutrient_id] = amount
+
+# Now add the brand_owner column
+food_nutrient_expanded["brand_owner"] = food_nutrient["brand_owner"]
+
+# Also add the category column
+food_nutrient_expanded["category"] = food_nutrient_expanded.index.map(branded_food["branded_food_category"])
+
+# Now we can save the DataFrame to a file
+food_nutrient_expanded.to_hdf("Data/FoodData.h5", index=True, complevel=9, 
+                              key="food_nutrient_expanded", mode="w")
