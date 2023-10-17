@@ -23,11 +23,19 @@ desired_cols = ["id", "name", "unit_name"]
 nutrient = pd.read_table("Data/FoodData/nutrient.csv", sep=',', usecols=desired_cols, index_col=0)
 
 # Load category to group mapping
-with open("Data/categories-to-groups.map", "r") as f:
-    raw = f.read()
-    raw = raw.replace("{", "")
-    raw = raw.replace("}", "")
-    category_to_group = dict(raw)
+# category_to_group = pd.read_table("Data/categories-to-groups.map", sep=',', index_col=0).to_dict()
 
-print(category_to_group)
-print(len(category_to_group.keys()))
+# print(category_to_group)
+# print(len(category_to_group.keys()))
+
+# Now replace the category names with the group names
+# branded_food["branded_food_category"] = branded_food["branded_food_category"].map(category_to_group)
+
+# food_nutrient codes to nutrient names
+food_nutrient["nutrient_id"] = food_nutrient["nutrient_id"].map(nutrient["name"])
+
+# Combine the dataframes into one master dataframe where all data is interpreted:
+#   For each item in food we need to check for each nutrient in food_nutrient and add it as a column
+#   to the food dataframe. We also add the category and brand owner to the food dataframe.
+
+print(food_nutrient.head())
