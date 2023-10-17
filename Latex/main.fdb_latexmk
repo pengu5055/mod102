@@ -1,13 +1,13 @@
 # Fdb version 4
-["bibtex main"] 1697571228 "main.aux" "main.bbl" "main" 1697571326 0
-  "./sources.bib" 1697060406 585 59db498271dfb5e1811a288748c6fc20 ""
+["bibtex main"] 1697571670 "main.aux" "main.bbl" "main" 1697571670 0
+  "./sources.bib" 1697571670 728 2e3f1d493f7064c9c60718a41ee83e4a ""
   "/usr/share/texlive/texmf-dist/bibtex/bst/base/unsrt.bst" 1684972800 18030 1376b4b231b50c66211e47e42eda2875 ""
   "main.aux" 1697571326 1326 efdbee3180170e8d28965b2cb76d057c "pdflatex"
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1697571325 "/home/pengu5055/Documents/FMF/Year1/MA1/mod102/Latex/main.tex" "main.pdf" "main" 1697571326 0
+["pdflatex"] 1697571325 "/home/pengu5055/Documents/FMF/Year1/MA1/mod102/Latex/main.tex" "main.pdf" "main" 1697571670 0
   "/home/pengu5055/Documents/FMF/Year1/MA1/mod102/Latex/main.tex" 1697571325 1286 615e87e705738b7270ef9e0968c5d2f8 ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmbx10.tfm" 1136768653 1328 c834bbb027764024c09d3d2bf908b5f0 ""
@@ -91,7 +91,7 @@
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1697067269 7863022 6fefdb3e94e1bc9ec82b9ea0b2915fca ""
   "logo.png" 1697060406 8303 7b15c7eec596b95d22d9e8d01528be9a ""
   "main.aux" 1697571326 1326 efdbee3180170e8d28965b2cb76d057c "pdflatex"
-  "main.bbl" 1697571228 49 0eba253fc001332e731e8aba3f23127b "bibtex main"
+  "main.bbl" 1697571670 49 0eba253fc001332e731e8aba3f23127b "bibtex main"
   "main.out" 1697571326 609 6dbb6e0b22aa26b1004ac1d435cf1dcb "pdflatex"
   "main.tex" 1697571325 1286 615e87e705738b7270ef9e0968c5d2f8 ""
   "main.toc" 1697571326 421 7a1b67f5b1cf06999da3820a3c9d6757 "pdflatex"
