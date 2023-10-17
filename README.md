@@ -17,3 +17,5 @@ Additionally it must hold:
 * 3500 mg of potassium
 * acceptable level of sodium (500 - 2400 mg)
 
+## Possible ideas
+* Create a diet for an alcoholic so maximize the amount of alcohol in the diet

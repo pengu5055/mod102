@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import cmasher as cmr
 
-df = pd.read_table('table.dat', sep=',', skiprows=2, index_col=0)
+df = pd.read_table('Data/table.dat', sep=',', skiprows=2, index_col=0)
 
 # Create the 'prob' variable to contain the problem data
 prob = LpProblem("Diet Problem", LpMinimize)
@@ -53,5 +53,5 @@ var_names = np.array([v.name for v in prob.variables()])
 var_values = np.array([v.varValue for v in prob.variables()])
 solution = np.column_stack((var_names, var_values))
 
-np.savetxt(f"Solutions/{model_name}-sol.dat", solution, delimiter=",", fmt="%s", header="Variable,Value")
+np.savetxt(f"Solutions/{model_name}-sol.dat", solution, delimiter=",", fmt="%s", header="Item,Value")
 

@@ -7,8 +7,12 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 import cmasher as cmr
-from floweaver import *
+import holoviews as hv
+from holoviews import dim, opts
 import tomllib as toml
+
+hv.extension('matplotlib')
+hv.output(fig='png')
 
 
 def load_model(path):
@@ -16,10 +20,11 @@ def load_model(path):
     Load model solution from a file.
     Essentially this is just an alias for the pd.read_table() function.
     """
-    df = pd.read_table(path, sep=',', index_col=0)
-    if "Food_" in df.index.name:
-        new_index = df.index.str.replace("Food_", "")
-        df.index = new_index
+    df = pd.read_table(path, sep=',', names=["Item", "Value"], skiprows=1, index_col=0)
+
+    new_index = df.index.tolist()
+    new_index = [item.replace("Food_", "") for item in new_index]
+    df.index = new_index
 
     return df
 
@@ -39,34 +44,44 @@ def load_constraints(path):
         constraints = toml.load(f)
     return constraints
 
-def plot_category_sankey(model_data, food_database, constraints):
+def plot_category_sankey(output_filename, model_data, food_database, constraints):
     """
     
-    """
-    nodes = {
-        "item": ProcessGroup(food_database.index),
-        "full": ProcessGroup([np.sum([100 * point for point in model_data["Values"]])])
-    }
+    """ 
+    # Add nodes where value is non-zero
+    model_data_select = model_data[model_data["Value"] > 0]
 
-    partition_data = []
+    # For given item name find category in food database
+    categories = np.unique(np.array([food_database.loc[item, "Category"] for item in model_data_select.index.tolist()]))
 
-    for category in food_database["Category"].unique():
-        partition_data.append(Partition.Simple(category, 
-                     food_database[food_database["Category"] == category].index))
+    categories_mass = np.zeros(len(categories))
+    # Calculate the total mass of each category
+    for i, category in enumerate(categories):
+        # Get all items in the category
+        items = [item for item in model_data_select.index.tolist() if food_database.loc[item, "Category"] == category]
         
-    nodes["item"].partition = Partition.MultiLevel(*partition_data)
+        # Calculate the total mass that each item contributes to the category
+        mass = np.sum(np.array([100 * model_data_select.loc[item, "Value"] for item in items]))
 
-    ordering = [
-        ["item"],
-        ["category"],
-        ["full"],
+        categories_mass[i] = mass
+
+    nodes = np.array(["Full diet", *categories, *model_data_select.index.tolist()])
+    nodes = hv.Dataset(enumerate(nodes), 'index', 'label')
+
+    edges = [ 
+        (0, i + 1, categories_mass[i]) for i in range(len(categories))
     ]
-    
-    bundles = [
-        Bundle("item", "category"),
-        Bundle("category", "full"),
-    ]
+    #+ [
+    #    (len(model_data.index) + i, len(model_data.index) + len(categories)) for i in range(len(model_data.index))
+    #]
 
-    sdd = SankeyDefinition(nodes, bundles, ordering)
-    weave(sdd, model_data).to_widget()
+    value_dim = hv.Dimension('Weight', label='Weight', unit='g')
 
+    fig = hv.Sankey((edges, nodes), ['From', 'To'], vdims=value_dim).opts(
+        opts.Sankey(cmap="cmr.nuclear", labels="label", label_position='right',
+                     edge_color=dim('To').str(), fig_size=300,
+                     node_color=dim('index').str())
+    )
+
+
+    hv.save(fig, "test.png")

@@ -15,4 +15,4 @@ food_database = load_database("Data/table.dat")
 constraints = load_constraints("Data/basic_con.toml")
 
 # Plot the results
-plot_category_sankey(model_data, food_database, constraints)
+plot_category_sankey("basic-model", model_data, food_database, constraints)
