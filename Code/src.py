@@ -95,7 +95,7 @@ def plot_category_sankey(output_filename, model_data, food_database, title="",
     value_dim = hv.Dimension('Weight', label='Weight', unit='g')
 
     fig = hv.Sankey((edges, nodes), ['From', 'To'], vdims=value_dim).opts(
-        opts.Sankey(cmap="bmw", labels="label", label_position='right',
+        opts.Sankey(cmap="kgy", labels="label", label_position='right',
                      edge_color=dim('To').str(), fig_size=700, label_text_font_size='22',
                      node_color=dim('index').str(), )
     ) * hv.Text(550, -70, subtext, color="gray", fontsize=28) * \

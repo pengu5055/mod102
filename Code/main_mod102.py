@@ -10,8 +10,8 @@ import cmasher as cmr
 from src import *
 
 # Parameters
-OptFat = True
-OptCost = False
+OptFat = False
+OptCost = True
 Posh = False
 
 df = pd.read_table('Data/table.dat', sep=',', skiprows=2, index_col=0)
@@ -50,23 +50,23 @@ prob += lpSum([df.loc[i, 'Ca[mg]'] * food_vars[i] for i in food_items]) >= 1000,
 prob += lpSum([df.loc[i, 'Fe[mg]'] * food_vars[i] for i in food_items]) >= 18, "IronRequirement"
 
 # Add additional constraints
-if False:
+if True:
     prob += lpSum([df.loc[i, 'Vitamin_C[mg]'] * food_vars[i] for i in food_items]) >= 60, "VitCRequirement"
     prob += lpSum([df.loc[i, 'Kalij[mg]'] * food_vars[i] for i in food_items]) >= 3500, "PotassiumRequirement"
     prob += lpSum([df.loc[i, 'Natrij[mg]'] * food_vars[i] for i in food_items]) >= 500, "SodiumLowerBound"
     prob += lpSum([df.loc[i, 'Natrij[mg]'] * food_vars[i] for i in food_items]) <= 2400, "SodiumUpperBound"
 
 # Add mass limit
-if True:
+if False:
     prob += lpSum([100 * food_vars[i] for i in food_items]) <= 2000, "MassLimit"
 
 if False:
     prob += prob.objective >= 15
 
-model_name = "diet-model_min-fat"
-title = "Pretty realistic lean diet"
-subtext = "Low fat optimization with weight limit and additional constraints"
-unit="g" # Of the objective function
+model_name = "diet-model_min-eur-add"
+title = "Kalorično prekomerna prehrana"
+subtext = "Cost [EUR] optimization, as low as possible with additional constraints"
+unit="EUR" # Of the objective function
 prob.writeLP(f"Models/{model_name}.lp")
 
 # Slove the problem
