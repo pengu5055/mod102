@@ -7,6 +7,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 import cmasher as cmr
+from src import *
 
 df = pd.read_table('Data/table.dat', sep=',', skiprows=2, index_col=0)
 
@@ -29,10 +30,10 @@ prob += lpSum([df.loc[i, 'Proteini[g]'] * food_vars[i] for i in food_items]) >= 
 prob += lpSum([df.loc[i, 'Ca[mg]'] * food_vars[i] for i in food_items]) >= 1000, "CalciumRequirement"
 prob += lpSum([df.loc[i, 'Fe[mg]'] * food_vars[i] for i in food_items]) >= 18, "IronRequirement"
 # Mass limit where the table data is nutritional value per 100g
-prob += lpSum([100 * food_vars[i] for i in food_items]) <= 2000, "MassLimit"
+# prob += lpSum([100 * food_vars[i] for i in food_items]) <= 2000, "MassLimit"
 
-model_name = "diet-model_basic.lp"
-prob.writeLP(f"Models/{model_name}")
+model_name = "diet-model_no-weight"
+prob.writeLP(f"Models/{model_name}.lp")
 
 # Slove the problem
 prob.solve()
@@ -54,4 +55,14 @@ var_values = np.array([v.varValue for v in prob.variables()])
 solution = np.column_stack((var_names, var_values))
 
 np.savetxt(f"Solutions/{model_name}-sol.dat", solution, delimiter=",", fmt="%s", header="Item,Value")
+
+# Visualize the model solution
+
+# Load the model solution
+model_data = load_model(f"Solutions/{model_name}-sol.dat")
+
+# Load the database of food items
+food_data = load_database("Data/table.dat")
+
+plot_category_sankey(f"{model_name}-visual", model_data, food_data)
 
