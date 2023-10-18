@@ -88,8 +88,8 @@ def plot_category_sankey(output_filename, model_data, food_database, title="",
         opts.Sankey(cmap="bmy", labels="label", label_position='right',
                      edge_color=dim('To').str(), fig_size=700, label_text_font_size='22',
                      node_color=dim('index').str(), )
-    ) * hv.Text(550, -70, subtext, color="#454545", fontsize=26) * \
-        hv.Text(550, -100, f"Minimized quantity: {opt} {unit}", color="#454545", fontsize=36)
+    ) * hv.Text(550, -70, subtext, color="gray", fontsize=28) * \
+        hv.Text(550, -100, f"Minimized quantity: {round(opt, 3)} {unit}", color="gray", fontsize=26)
 
     fig.opts(opts.Overlay(title=title, fontsize=36))
 
