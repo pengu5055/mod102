@@ -35,6 +35,9 @@ print(f"Hi! This is rank {rank} on {hostname}. Ready to go to work...")
 desired_cols = ["fdc_id", "id", "nutrient_id", "amount"]
 food_nutrient = pd.read_table("Data/FoodData/food_nutrient.csv", sep=',', usecols=desired_cols, index_col=1, )
 
+# NOTE: THIS IS HERE FOR DEBUGGING PURPOSES
+food_nutrient = food_nutrient.iloc[:100, :]
+
 desired_cols = ["fdc_id", "data_type", "description"]
 food = pd.read_table("Data/FoodData/food.csv", sep=',', usecols=desired_cols, index_col=0)
 # Only keep rows that are categorized as "Branded Food"
@@ -89,9 +92,7 @@ if rank == 0:
 
 chunk_indices = comm.bcast(chunk_indices, root=0)
 
-print(f"Rank {rank} has indices {chunk_indices[rank]}")
-
-quit()
+food_nutrient = food_nutrient.iloc[chunk_indices[rank][0]:chunk_indices[rank][1], :]
 
 # food_nutrient codes to nutrient names
 food_nutrient["nutrient_id"] = food_nutrient["nutrient_id"].map(nutrient["name"])
@@ -114,12 +115,12 @@ unique_nutrient_ids = np.unique(np.array([item for sublist in food_nutrient["nut
 
 # It is necessary to use DataFrame operations since the data is so massive
 # First create a DataFrame of zeros
-food_nutrient_expanded = pd.DataFrame(0.0, index=food_nutrient.index, columns=[*unique_nutrient_ids, "group"])
+food_nutrient_expanded_node = pd.DataFrame(0.0, index=food_nutrient.index, columns=[*unique_nutrient_ids, "group"])
 
 # Now fill the DataFrame with the values from the food_nutrient DataFrame
 for i, row in food_nutrient.iterrows():
     for nutrient_id, amount in zip(row["nutrient_id"], row["amount"]):
-        food_nutrient_expanded.loc[i, nutrient_id] = amount
+        food_nutrient_expanded_node.loc[i, nutrient_id] = amount
     
     # Since we're already iterating, swap category with group
 
@@ -137,17 +138,30 @@ for i, row in food_nutrient.iterrows():
     # which is strange but would mean that OpenAI did not correctly categorize 
     try: 
         # Explicitly cast to string so DataFrame switches to object type
-        food_nutrient_expanded.loc[i, "group"] = str(group)
+        food_nutrient_expanded_node.loc[i, "group"] = str(group)
     
     except NameError:
-        food_nutrient_expanded.loc[i, "group"] = str("Unknown")
+        food_nutrient_expanded_node.loc[i, "group"] = str("Unknown")
 
 # Now add the brand_owner column but only keep the first value
-food_nutrient_expanded["brand_owner"] = food_nutrient["brand_owner"].apply(lambda x: x[0])
+food_nutrient_expanded_node["brand_owner"] = food_nutrient["brand_owner"].apply(lambda x: x[0])
 
 # Set the index name to "Item"
-food_nutrient_expanded.index.name = "Item"
+food_nutrient_expanded_node.index.name = "Item"
 
-# Now we can save the DataFrame to a file
-food_nutrient_expanded.to_hdf("Data/FoodData_test.h5", index=True, complevel=9, 
-                              key="food_nutrient_expanded", mode="w")
+# ---- Gather the data ----
+
+# Gather the data on the root node
+food_nutrient_expanded = comm.gather(food_nutrient_expanded_node, root=0)
+
+print(f"Rank {rank} is done!")
+
+if rank == 0:
+    food_nutrient_expanded = pd.concat(food_nutrient_expanded)
+    print(food_nutrient_expanded.index.size)
+    
+    # Now we can save the DataFrame to a file
+    food_nutrient_expanded.to_hdf("Data/FoodData_test.h5", index=True, complevel=9, 
+                                key="food_nutrient_expanded", mode="w")
+    
+    
