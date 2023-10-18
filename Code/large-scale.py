@@ -10,6 +10,9 @@ import cmasher as cmr
 
 food_data = food_data = pd.read_hdf("Data/FoodData_processed.h5")
 
+# For DEBUG purposes take a subset of the data
+food_data = food_data.iloc[:100, :]
+
 # This is how you remember all these columns
 # print(food_data.columns.tolist())
 
@@ -49,22 +52,29 @@ prob.solve()
 # Print the status of the solution
 # print("Status:", LpStatus[prob.status])
 
+# Print the optimal solution
+for v in prob.variables():
+    print(v.name, "=", v.varValue)
+print("Total energy intake per person = ", value(prob.objective))
+
 # Save the solution to a file with numpy
 var_names = np.array([v.name for v in prob.variables()])
 var_values = np.array([v.varValue for v in prob.variables()])
 solution = np.column_stack((var_names, var_values))
 
-np.savetxt(f"Solutions/{model_name}-sol.dat", solution, delimiter=",", fmt="%s", header="Item,Value")
+np.savetxt(f"Solutions/{model_name}-sol.dat", solution, delimiter="\t", fmt="%s", header="Item,Value")
 
 if True:
     # Load the model solution
-    model_data = df = pd.read_table(f"Solutions/{model_name}-sol.dat", sep=',', names=["Item", "Value"], skiprows=1, index_col=0)
+    model_data = pd.read_table(f"Solutions/{model_name}-sol.dat", sep='\t', names=["Item", "Value"], skiprows=1, index_col=0)
+
+    new_index = model_data.index.tolist()
+    new_index = [item.replace("Food_", "") for item in new_index]
+    model_data.index = new_index
+
 
     # Load the database of food items
     food_database = food_data
 
-    # Load the constraints
-    constraints = load_constraints("Data/basic_con.toml")
-
     # Plot the results
-    plot_category_sankey(f"{model_name}_visual.png", model_data, food_database, constraints)
+    plot_category_sankey(f"{model_name}_visual.png", model_data, food_database)

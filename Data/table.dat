@@ -1,6 +1,6 @@
 #vrednosti za 100g vsakega zivila,,,,,,,,,,,
 #podatki o cenah: Nina Sedej [2018],,,,,,,,,,,
-zivilo,Energija[kcal],Mascobe[g],Ogljikovi_Hidrati[g],Proteini[g],Ca[mg],Fe[mg],Vitamin_C[mg],Kalij[mg], Natrij[mg],Cena[EUR],Category
+zivilo,Energija[kcal],Mascobe[g],Ogljikovi_Hidrati[g],Proteini[g],Ca[mg],Fe[mg],Vitamin_C[mg],Kalij[mg],Natrij[mg],Cena[EUR],Category
 Ovseni_kosmici,369,6.1,64,15.5,54,4.7,0,354,286,0.11,Carbohydrates
 Jabolko,52,0.17,13.81,0.26,6,0.12,4.6,107,1,0.15,Fruit
 Pomfri,93,12,21.55,1.96,5,0.35,12.8,391,241,0.1,Junk
