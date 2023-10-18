@@ -80,4 +80,18 @@ ProteinRequirement: 11 Food_Ameriska_pica + 1.09 Food_Banana
  + 1.25 Food_Solata + 1.82 Food_Strocji_fizol + 17.18 Food_Svinjina
  + 4 Food_Torta + 30 Food_Tuna + 0.07 Food_Vino_cabernet
  + 0.07 Food_Vino_traminec + 1.28 Food_Zelje >= 50
+_C1: 0.42 Food_Ameriska_pica + 0.12 Food_Banana + 0.3 Food_Brokoli
+ + 1.1 Food_Cokolada + 0.35 Food_Fizol + 1.3 Food_Govedina + 0.2 Food_Grozdje
+ + 0.15 Food_Jabolko + 0.9 Food_Jagode + 0.3 Food_Jajce + 0.62 Food_Kakav
+ + 0.6 Food_Kokice + 0.12 Food_Korenje + 0.1 Food_Krompir + 0.17 Food_Kruh_bel
+ + 0.3 Food_Kruh_polnozrnat + 0.15 Food_Kumara + 4 Food_Losos
+ + 0.2 Food_Makaroni + 0.5 Food_Marmelada + 1.1 Food_Maslo + 0.8 Food_Med
+ + 0.1 Food_Mleko + Food_Mortadela + 0.7 Food_Nutella + 0.8 Food_Olivno_olje
+ + 0.11 Food_Ovseni_kosmici + 0.16 Food_Paprika + 0.27 Food_Paradiznik
+ + Food_Piscanec + 0.2 Food_Pivo + 0.18 Food_Pomaranca + 0.1 Food_Pomfri
+ + 0.7 Food_Postrv + Food_Puran + 0.05 Food_Radenska + 0.2 Food_Rdeca_pesa
+ + 0.3 Food_Riz + 0.7 Food_Sir_edamec + 1.5 Food_Skusa_soljena + 0.11 Food_Sol
+ + 0.11 Food_Solata + 0.5 Food_Strocji_fizol + 1.1 Food_Svinjina
+ + 1.6 Food_Torta + 1.5 Food_Tuna + 0.67 Food_Vino_cabernet
+ + 0.9 Food_Vino_traminec + 0.07 Food_Zelje >= 15
 End

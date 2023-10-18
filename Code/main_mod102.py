@@ -50,7 +50,7 @@ prob += lpSum([df.loc[i, 'Ca[mg]'] * food_vars[i] for i in food_items]) >= 1000,
 prob += lpSum([df.loc[i, 'Fe[mg]'] * food_vars[i] for i in food_items]) >= 18, "IronRequirement"
 
 # Add additional constraints
-if True:
+if False:
     prob += lpSum([df.loc[i, 'Vitamin_C[mg]'] * food_vars[i] for i in food_items]) >= 60, "VitCRequirement"
     prob += lpSum([df.loc[i, 'Kalij[mg]'] * food_vars[i] for i in food_items]) >= 3500, "PotassiumRequirement"
     prob += lpSum([df.loc[i, 'Natrij[mg]'] * food_vars[i] for i in food_items]) >= 500, "SodiumLowerBound"
@@ -60,12 +60,12 @@ if True:
 if False:
     prob += lpSum([100 * food_vars[i] for i in food_items]) <= 2000, "MassLimit"
 
-if True:
+if False:
     prob += prob.objective >= 15
 
-model_name = "diet-model_min-eur-add-budget"
-title = "Če moramo zapraviti vsaj 15 EUR bi kupil losos"
-subtext = "Cost [EUR] optimization with budget lower limit and additional constraints"
+model_name = "diet-model_min-eur"
+title = "Mleko in ovseni kosmiči, a kalorije so višje"
+subtext = "Cost [EUR] optimization, as low as possible"
 unit="eur" # Of the objective function
 prob.writeLP(f"Models/{model_name}.lp")
 
