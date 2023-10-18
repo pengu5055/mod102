@@ -36,7 +36,7 @@ desired_cols = ["fdc_id", "id", "nutrient_id", "amount"]
 food_nutrient = pd.read_table("Data/FoodData/food_nutrient.csv", sep=',', usecols=desired_cols, index_col=1, )
 
 # NOTE: THIS IS HERE FOR DEBUGGING PURPOSES
-food_nutrient = food_nutrient.iloc[:100, :]
+# food_nutrient = food_nutrient.iloc[:100, :]
 
 desired_cols = ["fdc_id", "data_type", "description"]
 food = pd.read_table("Data/FoodData/food.csv", sep=',', usecols=desired_cols, index_col=0)
@@ -161,7 +161,7 @@ if rank == 0:
     print(food_nutrient_expanded.index.size)
     
     # Now we can save the DataFrame to a file
-    food_nutrient_expanded.to_hdf("Data/FoodData_test.h5", index=True, complevel=9, 
+    food_nutrient_expanded.to_hdf("Data/FoodData_proc_v2.h5", index=True, complevel=9, 
                                 key="food_nutrient_expanded", mode="w")
     
     
