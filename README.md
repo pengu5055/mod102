@@ -1,5 +1,17 @@
 # **Linear programing**
 
+# **Repository Installation**
+Since full unprocessed datasets are too large to be stored in the repository, they are stored elsewhere
+online and must be downloaded separately if you want full functionality of all the scripts. Most importantly
+the FoodData Central database must be downloaded from [here](https://fdc.nal.usda.gov/download-datasets.html)
+It can be done like so:
+
+```bash
+cd Data
+wget https://fdc.nal.usda.gov/fdc-datasets/FoodData_Central_csv_2023-04-20.zip
+unzip -d FoodData FoodData_Central_csv_2023-04-20.zip
+```
+
 ## **Basic problem**
 Let us minimize the amount of calories, thus creating a diet plan if we need to meet the following
 conditions:  
