@@ -63,9 +63,12 @@ if False:
 if False:
     prob += prob.objective >= 15
 
-model_name = "diet-model_min-eur-add"
-title = "Kalorično prekomerna prehrana"
-subtext = "Cost [EUR] optimization, as low as possible with additional constraints"
+if True:
+    prob += lpSum([df.loc[i, 'Energija[kcal]'] * food_vars[i] for i in food_items]) <= 2000, "EnergyRequirement"
+
+model_name = "diet-model_min-eur-cal"
+title = "Sprejemljiva poceni dieta"
+subtext = "Cost [EUR] optimization, with calorie limit and additional constraints"
 unit="EUR" # Of the objective function
 prob.writeLP(f"Models/{model_name}.lp")
 

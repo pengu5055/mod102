@@ -14,6 +14,9 @@
 \contentsline {subsubsection}{\numberline {4.3.3}Dieta z manj maščobami in omejitvijo mase}{10}{subsubsection.4.3.3}%
 \contentsline {subsubsection}{\numberline {4.3.4}Dieta z manj maščpbami, omejitvijo mase in dodatnimi omejitvami}{11}{subsubsection.4.3.4}%
 \contentsline {subsection}{\numberline {4.4}Opmizacija cene}{12}{subsection.4.4}%
-\contentsline {subsubsection}{\numberline {4.4.1}Čim cenejši obrok, ki zadosti osnovnim potrebam}{12}{subsubsection.4.4.1}%
-\contentsline {section}{\numberline {5}Komentarji in izboljšave}{12}{section.5}%
-\contentsline {section}{Literatura}{13}{section*.9}%
+\contentsline {subsubsection}{\numberline {4.4.1}Čim cenejša dieta, ki zadosti osnovnim potrebam}{12}{subsubsection.4.4.1}%
+\contentsline {subsubsection}{\numberline {4.4.2}Čim cenejša dieta, z dodatnimi zahtevami}{13}{subsubsection.4.4.2}%
+\contentsline {subsubsection}{\numberline {4.4.3}Čim cenejša dieta, z dodatnimi zahtevami in omejitvijo kalorij}{13}{subsubsection.4.4.3}%
+\contentsline {subsubsection}{\numberline {4.4.4}Namenski bon za $15$ EUR}{13}{subsubsection.4.4.4}%
+\contentsline {section}{\numberline {5}Komentarji in izboljšave}{14}{section.5}%
+\contentsline {section}{Literatura}{15}{section*.13}%
