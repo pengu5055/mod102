@@ -46,6 +46,10 @@ prob += lpSum([100 * food_vars[i] for i in food_items]) <= 2000, "MassLimit"
 model_name = "diet-model_expanded"
 prob.writeLP(f"Models/{model_name}.lp")
 
+# Moving to cluster computing enabled solver will is practically
+# a necessity. The default solver is too slow.
+quit()
+
 # Slove the problem
 prob.solve()
 
