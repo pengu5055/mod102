@@ -4,6 +4,7 @@ it is made up of multiple files that interlink with each other.
 """
 import numpy as np
 import pandas as pd
+from src import most_frequent
 
 # Read the data from the files
 desired_cols = ["fdc_id", "id", "nutrient_id", "amount"]
@@ -32,6 +33,10 @@ category_to_group_map = category_to_group.to_dict()["group"]
 # Now replace the category names with the group names
 branded_food["branded_food_category"] = branded_food["branded_food_category"].replace(category_to_group_map)
 
+# NOTE: THIS IS HERE FOR DEBUGGING PURPOSES
+# food_nutrient = food_nutrient.iloc[:100, :]
+
+
 # food_nutrient codes to nutrient names
 food_nutrient["nutrient_id"] = food_nutrient["nutrient_id"].map(nutrient["name"])
 
@@ -40,6 +45,9 @@ food_nutrient["brand_owner"] = food_nutrient.index.map(branded_food["brand_owner
 
 # food_nutrient codes to food names
 food_nutrient.index = food_nutrient.index.map(food["description"])
+
+# Also do the same for the branded_food DataFrame
+branded_food.index = branded_food.index.map(food["description"])
 
 # Now gather all duplications of the id column and append the nutrient_id and amount columns
 food_nutrient = food_nutrient.groupby(food_nutrient.index).agg({"nutrient_id": lambda x: list(x), "amount": lambda x: list(x), "brand_owner": lambda x: list(x)})
@@ -50,19 +58,29 @@ unique_nutrient_ids = np.unique(np.array([item for sublist in food_nutrient["nut
 
 # It is necessary to use DataFrame operations since the data is so massive
 # First create a DataFrame of zeros
-food_nutrient_expanded = pd.DataFrame(0.0, index=food_nutrient.index, columns=unique_nutrient_ids)
+food_nutrient_expanded = pd.DataFrame(0.0, index=food_nutrient.index, columns=[*unique_nutrient_ids, "group"])
 
 # Now fill the DataFrame with the values from the food_nutrient DataFrame
 for i, row in food_nutrient.iterrows():
     for nutrient_id, amount in zip(row["nutrient_id"], row["amount"]):
         food_nutrient_expanded.loc[i, nutrient_id] = amount
+    
+    # Since we're already iterating, swap category with group
+    group = branded_food.loc[i, "branded_food_category"].tolist()
+
+    # Since database input is stupid values are NOT UNIQUE
+    if len(group) > 1:
+        group = most_frequent(group)
+
+    # Explicitly cast to string so DataFrame switches to object type
+    food_nutrient_expanded.loc[i, "group"] = str(group)
 
 # Now add the brand_owner column but only keep the first value
 food_nutrient_expanded["brand_owner"] = food_nutrient["brand_owner"].apply(lambda x: x[0])
 
-# Also add the category column
-food_nutrient_expanded["category"] = food_nutrient_expanded.index.map(branded_food["branded_food_category"]).astype(str)
+# Set the index name to "Item"
+food_nutrient_expanded.index.name = "Item"
 
 # Now we can save the DataFrame to a file
-food_nutrient_expanded.to_hdf("Data/FoodData.h5", index=True, complevel=9, 
+food_nutrient_expanded.to_hdf("Data/FoodData_test.h5", index=True, complevel=9, 
                               key="food_nutrient_expanded", mode="w")

@@ -15,6 +15,13 @@ hv.extension('matplotlib')
 hv.output(fig='png')
 
 
+def most_frequent(List):
+    """
+    Finds the most frequent element in a list.
+    """
+    return max(set(List), key = List.count)
+
+
 def load_model(path):
     """
     Load model solution from a file.
@@ -28,6 +35,7 @@ def load_model(path):
 
     return df
 
+
 def load_database(path):
     """
     Load the database of food items.
@@ -36,6 +44,7 @@ def load_database(path):
     df = pd.read_table(path, sep=',', skiprows=2, index_col=0)
     return df
 
+
 def load_constraints(path):
     """
     Load the constraints from a file.
@@ -43,6 +52,7 @@ def load_constraints(path):
     with open(path, "rb") as f:
         constraints = toml.load(f)
     return constraints
+
 
 def plot_category_sankey(output_filename, model_data, food_database, title="",
                          subtext="", opt=0, unit="g", energy=0):
@@ -105,18 +115,16 @@ def plot_expanded(output_filename, model_data, food_database):
     # Add nodes where value is non-zero
     model_data_select = model_data[model_data["Value"] > 0]
 
-    print(model_data_select)
-
-    # For given item name find category in food database
-    categories = np.unique(np.array([food_database.loc[item, "category"] for item in model_data_select.index.tolist()]))
+    # For given item name find group in food database
+    categories = np.unique(np.array([food_database.loc[item, "group"] for item in model_data_select.index.tolist()]))
 
     categories_mass = np.zeros(len(categories))
-    # Calculate the total mass of each category
-    for i, category in enumerate(categories):
-        # Get all items in the category
-        items = [item for item in model_data_select.index.tolist() if food_database.loc[item, "Category"] == category]
+    # Calculate the total mass of each group
+    for i, group in enumerate(categories):
+        # Get all items in the group
+        items = [item for item in model_data_select.index.tolist() if food_database.loc[item, "group"] == group]
         
-        # Calculate the total mass that each item contributes to the category
+        # Calculate the total mass that each item contributes to the group
         mass = np.sum(np.array([100 * model_data_select.loc[item, "Value"] for item in items]))
 
         categories_mass[i] = mass
@@ -130,8 +138,8 @@ def plot_expanded(output_filename, model_data, food_database):
     ]
 
     edges_lye2 = []
-    for i, category in enumerate(categories):
-        items = [item for item in model_data_select.index.tolist() if food_database.loc[item, "Category"] == category]
+    for i, group in enumerate(categories):
+        items = [item for item in model_data_select.index.tolist() if food_database.loc[item, "group"] == group]
         for item in items:
             edges_lye2.append((i + 1, list(nodes_in).index(item) , 100 * model_data_select.loc[item, "Value"]))
 
