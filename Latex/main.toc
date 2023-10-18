@@ -8,6 +8,12 @@
 \contentsline {subsection}{\numberline {4.2}Osnovni model brez omejitve mase}{5}{subsection.4.2}%
 \contentsline {subsubsection}{\numberline {4.2.1}Osnovni model z omejitvijo mase}{6}{subsubsection.4.2.1}%
 \contentsline {subsubsection}{\numberline {4.2.2}Osnovni model z omejitvijo mase in dodatnimi omejitvami}{7}{subsubsection.4.2.2}%
-\contentsline {subsection}{\numberline {4.3}Dieta z manj maščobami}{8}{subsection.4.3}%
-\contentsline {section}{\numberline {5}Komentarji in izboljšave}{8}{section.5}%
-\contentsline {section}{Literatura}{9}{section*.5}%
+\contentsline {subsection}{\numberline {4.3}Dieta z manj maščobami}{9}{subsection.4.3}%
+\contentsline {subsubsection}{\numberline {4.3.1}Dieta z manj maščobami in brez omejitvije mase}{9}{subsubsection.4.3.1}%
+\contentsline {subsubsection}{\numberline {4.3.2}Dieta z manj maščobami z dodatnimi omejitvami}{10}{subsubsection.4.3.2}%
+\contentsline {subsubsection}{\numberline {4.3.3}Dieta z manj maščobami in omejitvijo mase}{10}{subsubsection.4.3.3}%
+\contentsline {subsubsection}{\numberline {4.3.4}Dieta z manj maščpbami, omejitvijo mase in dodatnimi omejitvami}{11}{subsubsection.4.3.4}%
+\contentsline {subsection}{\numberline {4.4}Opmizacija cene}{12}{subsection.4.4}%
+\contentsline {subsubsection}{\numberline {4.4.1}Čim cenejši obrok, ki zadosti osnovnim potrebam}{12}{subsubsection.4.4.1}%
+\contentsline {section}{\numberline {5}Komentarji in izboljšave}{12}{section.5}%
+\contentsline {section}{Literatura}{13}{section*.9}%
