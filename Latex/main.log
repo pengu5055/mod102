@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022/CVE-2023-32700 patched) (preloaded format=pdflatex 2023.10.12)  18 OCT 2023 17:50
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022/CVE-2023-32700 patched) (preloaded format=pdflatex 2023.10.12)  18 OCT 2023 21:42
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -732,7 +732,6 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 48
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 ))
 Package hyperref Info: Link coloring OFF on input line 33.
- (./main.out) (./main.out)
 \@outlinefile=\write6
 \openout6 = `main.out'.
 
@@ -745,14 +744,15 @@ Package translations Info: no dictionary file `translations-basic-dictionary-slo
 Package: textcomp 2020/02/02 v2.0n Standard LaTeX package
 )
 \c@lstlisting=\count374
-<logo.png, id=96, 220.67175pt x 141.22992pt>
+<logo.png, id=8, 220.67175pt x 141.22992pt>
 File: logo.png Graphic file (type png)
 <use logo.png>
 Package pdftex.def Info: logo.png  used on input line 36.
 (pdftex.def)             Requested size: 220.6712pt x 141.22955pt.
  [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./logo.png>] (./main.toc)
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./logo.png>]
+No file main.toc.
 \tf@toc=\write7
 \openout7 = `main.toc'.
 
@@ -809,7 +809,10 @@ Underfull \hbox (badness 10000) in paragraph at lines 224--226
 
  []
 
-<../Images/diet-model_basic-no-weight-visual.png, id=166, 1430.946pt x 934.6576pt>
+
+LaTeX Warning: Reference `fig:basic-no-mass' on page 5 undefined on input line 230.
+
+<../Images/diet-model_basic-no-weight-visual.png, id=55, 1430.946pt x 934.6576pt>
 File: ../Images/diet-model_basic-no-weight-visual.png Graphic file (type png)
 <use ../Images/diet-model_basic-no-weight-visual.png>
 Package pdftex.def Info: ../Images/diet-model_basic-no-weight-visual.png  used on input line 235.
@@ -820,31 +823,43 @@ Underfull \hbox (badness 10000) in paragraph at lines 229--238
  []
 
 [5]
+
+LaTeX Warning: Reference `fig:basic' on page 6 undefined on input line 248.
+
+
 Underfull \hbox (badness 10000) in paragraph at lines 247--249
 
  []
 
-<../Images/diet-model_basic-visual.png, id=174, 1430.946pt x 934.76083pt>
+<../Images/diet-model_basic-visual.png, id=64, 1430.946pt x 934.76083pt>
 File: ../Images/diet-model_basic-visual.png Graphic file (type png)
 <use ../Images/diet-model_basic-visual.png>
 Package pdftex.def Info: ../Images/diet-model_basic-visual.png  used on input line 254.
 (pdftex.def)             Requested size: 413.99895pt x 270.43185pt.
 [6 <../Images/diet-model_basic-no-weight-visual.png>]
+
+LaTeX Warning: Reference `fig:basic-add' on page 7 undefined on input line 271.
+
+
 Underfull \hbox (badness 10000) in paragraph at lines 269--272
 
  []
 
-<../Images/diet-model_basic-add-visual.png, id=183, 1430.946pt x 934.6576pt>
+<../Images/diet-model_basic-add-visual.png, id=73, 1430.946pt x 934.6576pt>
 File: ../Images/diet-model_basic-add-visual.png Graphic file (type png)
 <use ../Images/diet-model_basic-add-visual.png>
 Package pdftex.def Info: ../Images/diet-model_basic-add-visual.png  used on input line 277.
 (pdftex.def)             Requested size: 413.99895pt x 270.40198pt.
 [7 <../Images/diet-model_basic-visual.png>] [8 <../Images/diet-model_basic-add-visual.png>]
+
+LaTeX Warning: Reference `fig:fat-no-mass' on page 9 undefined on input line 290.
+
+
 Underfull \hbox (badness 10000) in paragraph at lines 289--291
 
  []
 
-<../Images/diet-model_min-fat-no-weight-visual.png, id=197, 1430.946pt x 934.76083pt>
+<../Images/diet-model_min-fat-no-weight-visual.png, id=88, 1430.946pt x 934.76083pt>
 File: ../Images/diet-model_min-fat-no-weight-visual.png Graphic file (type png)
 <use ../Images/diet-model_min-fat-no-weight-visual.png>
 Package pdftex.def Info: ../Images/diet-model_min-fat-no-weight-visual.png  used on input line 296.
@@ -855,11 +870,15 @@ Underfull \hbox (badness 10000) in paragraph at lines 301--304
  []
 
 [9 <../Images/diet-model_min-fat-no-weight-visual.png>]
+
+LaTeX Warning: Reference `fig:fat-add-no-mass' on page 10 undefined on input line 309.
+
+
 Underfull \hbox (badness 10000) in paragraph at lines 307--310
 
  []
 
-<../Images/diet-model_min-fat-add-no-weight-visual.png, id=205, 1430.946pt x 934.76083pt>
+<../Images/diet-model_min-fat-add-no-weight-visual.png, id=97, 1430.946pt x 934.76083pt>
 File: ../Images/diet-model_min-fat-add-no-weight-visual.png Graphic file (type png)
 <use ../Images/diet-model_min-fat-add-no-weight-visual.png>
 Package pdftex.def Info: ../Images/diet-model_min-fat-add-no-weight-visual.png  used on input line 315.
@@ -883,43 +902,56 @@ Underfull \hbox (badness 10000) in paragraph at lines 333--336
  []
 
 [10 <../Images/diet-model_min-fat-add-no-weight-visual.png>]
+
+LaTeX Warning: Reference `fig:fat-add' on page 11 undefined on input line 340.
+
+
 Underfull \hbox (badness 10000) in paragraph at lines 338--341
 
  []
 
-<../Images/diet-model_min-fat-add-visual.png, id=213, 1430.946pt x 934.76083pt>
+<../Images/diet-model_min-fat-add-visual.png, id=106, 1430.946pt x 934.76083pt>
 File: ../Images/diet-model_min-fat-add-visual.png Graphic file (type png)
 <use ../Images/diet-model_min-fat-add-visual.png>
 Package pdftex.def Info: ../Images/diet-model_min-fat-add-visual.png  used on input line 346.
 (pdftex.def)             Requested size: 413.99895pt x 270.43185pt.
-<./fbi-1.png, id=214, 442.65375pt x 262.73157pt>
+<./fbi-1.png, id=107, 442.65375pt x 262.73157pt>
 File: ./fbi-1.png Graphic file (type png)
 <use ./fbi-1.png>
 Package pdftex.def Info: ./fbi-1.png  used on input line 373.
 (pdftex.def)             Requested size: 241.49895pt x 143.3402pt.
-<./fbi-2.png, id=215, 469.755pt x 264.99pt>
+<./fbi-2.png, id=108, 469.755pt x 264.99pt>
 File: ./fbi-2.png Graphic file (type png)
 <use ./fbi-2.png>
 Package pdftex.def Info: ./fbi-2.png  used on input line 373.
 (pdftex.def)             Requested size: 241.49895pt x 136.23079pt.
 [11 <../Images/diet-model_min-fat-add-visual.png>]
-<../Images/diet-model_min-eur-no-weight-visual.png, id=223, 1430.946pt x 936.10298pt>
+
+LaTeX Warning: Reference `fig:eur' on page 12 undefined on input line 381.
+
+<../Images/diet-model_min-eur-no-weight-visual.png, id=116, 1430.946pt x 936.10298pt>
 File: ../Images/diet-model_min-eur-no-weight-visual.png Graphic file (type png)
 <use ../Images/diet-model_min-eur-no-weight-visual.png>
 Package pdftex.def Info: ../Images/diet-model_min-eur-no-weight-visual.png  used on input line 387.
 (pdftex.def)             Requested size: 413.99895pt x 270.82014pt.
- [12 <./fbi-1.png (PNG copy)> <./fbi-2.png (PNG copy)> <../Images/diet-model_min-eur-no-weight-visual.png>]
-<../Images/diet-model_min-eur-add-visual.png, id=233, 1430.946pt x 936.20622pt>
+[12 <./fbi-1.png (PNG copy)> <./fbi-2.png (PNG copy)> <../Images/diet-model_min-eur-no-weight-visual.png>]
+
+LaTeX Warning: Reference `fig:eur-add' on page 13 undefined on input line 399.
+
+<../Images/diet-model_min-eur-add-visual.png, id=127, 1430.946pt x 936.20622pt>
 File: ../Images/diet-model_min-eur-add-visual.png Graphic file (type png)
 <use ../Images/diet-model_min-eur-add-visual.png>
 Package pdftex.def Info: ../Images/diet-model_min-eur-add-visual.png  used on input line 405.
 (pdftex.def)             Requested size: 413.99895pt x 270.85pt.
-<../Images/diet-model_min-eur-cal-visual.png, id=235, 1430.946pt x 934.76083pt>
+
+LaTeX Warning: Reference `fig:eur-add-cal' on page 13 undefined on input line 415.
+
+<../Images/diet-model_min-eur-cal-visual.png, id=128, 1430.946pt x 934.76083pt>
 File: ../Images/diet-model_min-eur-cal-visual.png Graphic file (type png)
 <use ../Images/diet-model_min-eur-cal-visual.png>
 Package pdftex.def Info: ../Images/diet-model_min-eur-cal-visual.png  used on input line 421.
 (pdftex.def)             Requested size: 413.99895pt x 270.43185pt.
- [13 <../Images/diet-model_min-eur-add-visual.png>]
+[13 <../Images/diet-model_min-eur-add-visual.png>]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `math shift' on input line 431.
@@ -928,7 +960,10 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `math shift' on input line 431.
 
-<../Images/diet-model_min-eur-budget-visual.png, id=244, 1430.946pt x 936.20622pt>
+
+LaTeX Warning: Reference `fig:eur-budget' on page 14 undefined on input line 434.
+
+<../Images/diet-model_min-eur-budget-visual.png, id=137, 1430.946pt x 936.20622pt>
 File: ../Images/diet-model_min-eur-budget-visual.png Graphic file (type png)
 <use ../Images/diet-model_min-eur-budget-visual.png>
 Package pdftex.def Info: ../Images/diet-model_min-eur-budget-visual.png  used on input line 440.
@@ -946,7 +981,10 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `math shift' on input line 450.
 
-<../Images/diet-model_min-eur-add-budget-visual.png, id=252, 1430.946pt x 934.76083pt>
+
+LaTeX Warning: Reference `fig:eur-budget-add' on page 15 undefined on input line 452.
+
+<../Images/diet-model_min-eur-add-budget-visual.png, id=145, 1430.946pt x 934.76083pt>
 File: ../Images/diet-model_min-eur-add-budget-visual.png Graphic file (type png)
 <use ../Images/diet-model_min-eur-add-budget-visual.png>
 Package pdftex.def Info: ../Images/diet-model_min-eur-add-budget-visual.png  used on input line 458.
@@ -956,30 +994,87 @@ Underfull \hbox (badness 10000) in paragraph at lines 463--467
 
  []
 
-[16 <../Images/diet-model_min-eur-add-budget-visual.png>] (./main.bbl
+
+Underfull \hbox (badness 10000) in paragraph at lines 469--473
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 475--480
+
+ []
+
+<./astrum-server-room.jpg, id=153, 1204.5pt x 1606.0pt>
+File: ./astrum-server-room.jpg Graphic file (type jpg)
+<use ./astrum-server-room.jpg>
+Package pdftex.def Info: ./astrum-server-room.jpg  used on input line 483.
+(pdftex.def)             Requested size: 313.95291pt x 418.59818pt.
+[16 <../Images/diet-model_min-eur-add-budget-visual.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 488--498
+
+ []
+
+[17 <./astrum-server-room.jpg>]
+
+/home/pengu5055/Documents/FMF/Year1/MA1/mod102/Latex/main.tex:500: Package keyval Error: left undefined.
+
+See the keyval package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.500 ...textheight, left]{./astrum-dashboard.png}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+<./astrum-dashboard.png, id=167, 1902.3572pt x 670.75594pt>
+File: ./astrum-dashboard.png Graphic file (type png)
+<use ./astrum-dashboard.png>
+Package pdftex.def Info: ./astrum-dashboard.png  used on input line 500.
+(pdftex.def)             Requested size: 678.37492pt x 239.19635pt.
+
+Overfull \hbox (333.37492pt too wide) in paragraph at lines 500--501
+[][] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 505--510
+
+ []
+
+[18 <./astrum-dashboard.png (PNG copy)>] (./main.bbl
 
 LaTeX Warning: Empty `thebibliography' environment on input line 3.
 
-) [17] (./main.aux)
+) [19] (./main.aux)
 
 LaTeX Warning: There were undefined references.
 
-Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: FC8662705AFAFFD44E707230338D7A17;5024.
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+
+Package rerunfilecheck Warning: File `main.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `main.out':
+(rerunfilecheck)             Before: <no file>
+(rerunfilecheck)             After:  C6A0C1CBC762B05A8C69B09A3A25E91C;5337.
  ) 
 Here is how much of TeX's memory you used:
- 33776 strings out of 476182
- 708508 string characters out of 5796580
+ 33771 strings out of 476182
+ 708568 string characters out of 5796580
  1874793 words of memory out of 6000000
- 53503 multiletter control sequences out of 15000+600000
+ 53495 multiletter control sequences out of 15000+600000
  516518 words of font info for 48 fonts, out of 8000000 for 9000
  1137 hyphenation exceptions out of 8191
  83i,16n,80p,634b,1072s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb>
-Output written on main.pdf (18 pages, 18624064 bytes).
+Output written on main.pdf (20 pages, 19004000 bytes).
 PDF statistics:
- 348 PDF objects out of 1000 (max. 8388607)
- 268 compressed objects within 3 object streams
- 59 named destinations out of 1000 (max. 500000)
- 263 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 260 PDF objects out of 1000 (max. 8388607)
+ 177 compressed objects within 2 object streams
+ 65 named destinations out of 1000 (max. 500000)
+ 97 words of extra memory for PDF output out of 10000 (max. 10000000)
 

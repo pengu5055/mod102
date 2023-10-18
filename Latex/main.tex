@@ -465,6 +465,48 @@ je tudi fin. Zraven pa skuhaš kašo iz ovsenih kosmičev. To je verjetno najbol
 učinkovita dieta, ki sem jo dobil thus far, saj je hrane vse skupaj manj kot kilogram, pa 
 kljub temu presežemo $2000$ kcal. Grozno kako hitro se kalorije naberejo. \\
 
+\section{Expanded dataset}
+Da bi dobili še malo bolj zanimive rezultate, sem se odločil, da bom podatke malo razširil.
+S tem mislim, da sem na internetu staknil podatkovno bazo od USDA (\textit{United States 
+Department of Agriculture}), ki ima podatke o hranilnih vrednostih za ogromno živil. Vzel sem 
+le živila, ki imajo zraven še znamko. Vse skupaj znaša dobrih $400$ tisoč živil. \\
+
+\subsection{Predprocesiranje podatkov}
+The name of the game pri ogromnih podatkovnih setih, še sploh pa pri nestandardnih tabelah je
+predprocesiranje podatkov. To sem prvotno počel vse lokalno na svojem računalniku, a sem se, ko 
+se je obdelava zapletla, hitro naveličal čakanja. Računalnik je tako ali tako uporabljal samo eno
+jedro. Čas je bil za MPI in prehod na moj erm.. \textbf{ghetto HPC sistem} oz. ljubkovalno mu je
+ime \texttt{Astrum}. \\
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[height=0.7\textheight]{./astrum-server-room.jpg}
+    \caption{\texttt{Astrum} server room}
+    \label{fig:astrum}
+\end{figure}
+
+Moja domača gruča je sestavljena primarno iz starih IBM SAN Volume Controllerjev, ki sem jih 
+radodarno dobil zastonj. Teh je aktivno povezanih $10$ vendar sta v času pisanja tega poročila
+dva out of service zaradi problemov z RAID kontrolerji in tretja ni compute node, ampak je 
+NFS strežnik in zbiralec statistike. Tako da je na voljo $7$ strežnikov. Na komad en strežnik $24$ 
+niti, konfiguracija spomina pa je malo različna od strežnika do strežnika, ampak gre od $4$ GB 
+do okoli $142$ GB. Vse skupaj je povezano z $1$ Gbps ethernetom. Imam tudi opremo, da bi vzpostavil
+fibre channel SAN, ampak absolutno ni bilo dovolj časa za namen te naloge. Strastno si želim, da 
+bi kje dobil priložnost, kjer bi se lahko res detaljno ukvarjal z parametri in postavitvijo gruče. 
+Pravzaprav trenutnotudi nobenega resource management-a ni na gruči. Resno bi se bilo potrebno
+lotiti \texttt{Slurm}-a. \\
+
+\begin{figure}[H]
+    \includegraphics[height=0.4\textheight, left]{./astrum-dashboard.png}
+    \caption{\texttt{Astrum} nodes dashboard}
+    \label{fig:astrum-dash}
+\end{figure}
+
+Kakorkoli ideja je uporabiti OpenMPI in Python izvedenko \texttt{mpi4py}, da razpršim podatkovno
+bazo čez niti strežnikov in tako pospešim predprocesiranje. Rekel bi, da je bilo to zabavno, saj je 
+to res eden iz med tistih delov, ki me res veselijo, ampak res lovim rok za oddajo. Pa še T2 je 
+bilo treba klicati, ker so mi resetirali nastavitve modema in of course ne zaupajo svojim strankam
+dovolj, da bi jim dali dostop do nastavitev. \\
 
 \section{Komentarji in izboljšave}
 
