@@ -10,8 +10,8 @@ import cmasher as cmr
 from src import *
 
 # Parameters
-OptFat = False
-OptCost = True
+OptFat = True
+OptCost = False
 Posh = False
 
 df = pd.read_table('Data/table.dat', sep=',', skiprows=2, index_col=0)
@@ -57,16 +57,16 @@ if False:
     prob += lpSum([df.loc[i, 'Natrij[mg]'] * food_vars[i] for i in food_items]) <= 2400, "SodiumUpperBound"
 
 # Add mass limit
-if False:
+if True:
     prob += lpSum([100 * food_vars[i] for i in food_items]) <= 2000, "MassLimit"
 
 if False:
     prob += prob.objective >= 15
 
-model_name = "diet-model_min-eur"
-title = "Mleko in ovseni kosmiči, a kalorije so višje"
-subtext = "Cost [EUR] optimization, as low as possible"
-unit="eur" # Of the objective function
+model_name = "diet-model_min-fat"
+title = "Pretty realistic lean diet"
+subtext = "Low fat optimization with weight limit and additional constraints"
+unit="g" # Of the objective function
 prob.writeLP(f"Models/{model_name}.lp")
 
 # Slove the problem
@@ -76,7 +76,7 @@ prob.solve()
 print("Status:", LpStatus[prob.status])
 
 # Calculate calories
-if OptCost:
+if OptCost or OptFat:
     calories = 0
     for v in prob.variables():
         calories += df.loc[v.name.replace("Food_", ""), "Energija[kcal]"] * v.varValue
@@ -85,6 +85,7 @@ else:
     for v in prob.variables():
         print(v.name, "=", v.varValue)
     print("Total energy intake per person = ", value(prob.objective))
+    calories = prob.objective
 
 # Check if mass limit is satisfied
 print("Total mass of food = ", lpSum([100 * v.varValue for v in prob.variables()]))
