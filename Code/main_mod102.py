@@ -10,7 +10,9 @@ import cmasher as cmr
 from src import *
 
 # Parameters
-OptFat = True
+OptFat = False
+OptCost = True
+Posh = False
 
 df = pd.read_table('Data/table.dat', sep=',', skiprows=2, index_col=0)
 
@@ -26,16 +28,21 @@ food_items = list(df.index)
 food_vars = LpVariable.dicts("Food", food_items, lowBound=0, cat='Continuous')
 
 # Define objective function and add it to the problem
-if not OptFat:
-    prob += lpSum([df.loc[i, 'Energija[kcal]'] * food_vars[i] for i in food_items]), "Total energy intake per person"
-else:
+if OptFat:
     prob += lpSum([df.loc[i, 'Mascobe[g]'] * food_vars[i] for i in food_items]), "Total fat intake per person"
+elif OptCost:
+    prob += lpSum([df.loc[i, 'Cena[EUR]'] * food_vars[i] for i in food_items]), "Total cost of food"
+else:
+    prob += lpSum([df.loc[i, 'Energija[kcal]'] * food_vars[i] for i in food_items]), "Total energy intake per person"
 
 # And now we can add the constraints
-if not OptFat:
-    prob += lpSum([df.loc[i, 'Mascobe[g]'] * food_vars[i] for i in food_items]) >= 70, "FatRequirement"
-else:
+if OptFat:
     prob += lpSum([df.loc[i, 'Energija[kcal]'] * food_vars[i] for i in food_items]) >= 2000, "EnergyRequirement"
+else:
+    prob += lpSum([df.loc[i, 'Mascobe[g]'] * food_vars[i] for i in food_items]) >= 70, "FatRequirement"
+
+if Posh:
+    prob += lpSum([df.loc[i, 'Cena[EUR]'] * food_vars[i] for i in food_items]) >= 15, "CostRequirement"
 
 prob += lpSum([df.loc[i, 'Ogljikovi_Hidrati[g]'] * food_vars[i] for i in food_items]) >= 310, "CarbohydrateRequirement"
 prob += lpSum([df.loc[i, 'Proteini[g]'] * food_vars[i] for i in food_items]) >= 50, "ProteinRequirement"
@@ -50,14 +57,16 @@ if True:
     prob += lpSum([df.loc[i, 'Natrij[mg]'] * food_vars[i] for i in food_items]) <= 2400, "SodiumUpperBound"
 
 # Add mass limit
-if True:
+if False:
     prob += lpSum([100 * food_vars[i] for i in food_items]) <= 2000, "MassLimit"
 
+if True:
+    prob += prob.objective >= 15
 
-model_name = "diet-model_min-fat-add"
-title = "Quite optimal low-fat diet"
-subtext = "Fat optimization with weight limit and additional constraints"
-unit="g" # Of the objective function
+model_name = "diet-model_min-eur-add-budget"
+title = "Če moramo zapraviti vsaj 15 EUR bi kupil losos"
+subtext = "Cost [EUR] optimization with budget lower limit and additional constraints"
+unit="eur" # Of the objective function
 prob.writeLP(f"Models/{model_name}.lp")
 
 # Slove the problem
@@ -66,10 +75,16 @@ prob.solve()
 # Print the status of the solution
 print("Status:", LpStatus[prob.status])
 
-# Print the optimal solution
-for v in prob.variables():
-    print(v.name, "=", v.varValue)
-print("Total energy intake per person = ", value(prob.objective))
+# Calculate calories
+if OptCost:
+    calories = 0
+    for v in prob.variables():
+        calories += df.loc[v.name.replace("Food_", ""), "Energija[kcal]"] * v.varValue
+    print("Total calories = ", calories)
+else:
+    for v in prob.variables():
+        print(v.name, "=", v.varValue)
+    print("Total energy intake per person = ", value(prob.objective))
 
 # Check if mass limit is satisfied
 print("Total mass of food = ", lpSum([100 * v.varValue for v in prob.variables()]))
@@ -83,6 +98,7 @@ np.savetxt(f"Solutions/{model_name}-sol.dat", solution, delimiter=",", fmt="%s",
 
 # Visualize the model solution
 
+
 # Load the model solution
 model_data = load_model(f"Solutions/{model_name}-sol.dat")
 
@@ -91,5 +107,5 @@ food_data = load_database("Data/table.dat")
 
 plot_category_sankey(f"{model_name}-visual", model_data, food_data,
                      title=title, subtext=subtext, opt=prob.objective.value(),
-                     unit=unit)
+                     unit=unit, energy=calories)
 

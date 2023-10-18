@@ -45,7 +45,7 @@ def load_constraints(path):
     return constraints
 
 def plot_category_sankey(output_filename, model_data, food_database, title="",
-                         subtext="", opt=0, unit="g"):
+                         subtext="", opt=0, unit="g", energy=0):
     """
     
     """ 
@@ -89,7 +89,9 @@ def plot_category_sankey(output_filename, model_data, food_database, title="",
                      edge_color=dim('To').str(), fig_size=700, label_text_font_size='22',
                      node_color=dim('index').str(), )
     ) * hv.Text(550, -70, subtext, color="gray", fontsize=28) * \
-        hv.Text(550, -100, f"Minimized quantity: {round(opt, 3)} {unit}", color="gray", fontsize=26)
+        hv.Text(550, -100, f"Minimized quantity: {round(opt, 3)} {unit}", color="gray", fontsize=26) * \
+        hv.Text(550, -130, f"Total calories: {round(energy ,3)} kcal", color="gray", fontsize=26)
+    
 
     fig.opts(opts.Overlay(title=title, fontsize=36))
 

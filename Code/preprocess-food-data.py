@@ -57,8 +57,8 @@ for i, row in food_nutrient.iterrows():
     for nutrient_id, amount in zip(row["nutrient_id"], row["amount"]):
         food_nutrient_expanded.loc[i, nutrient_id] = amount
 
-# Now add the brand_owner column
-food_nutrient_expanded["brand_owner"] = food_nutrient["brand_owner"]
+# Now add the brand_owner column but only keep the first value
+food_nutrient_expanded["brand_owner"] = food_nutrient["brand_owner"].apply(lambda x: x[0])
 
 # Also add the category column
 food_nutrient_expanded["category"] = food_nutrient_expanded.index.map(branded_food["branded_food_category"]).astype(str)
