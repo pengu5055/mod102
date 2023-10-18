@@ -63,26 +63,3 @@ var_values = np.array([v.varValue for v in prob.variables()])
 solution = np.column_stack((var_names, var_values))
 
 np.savetxt(f"Solutions/{model_name}-sol.dat", solution, delimiter="\t", fmt="%s", header="Item,Value")
-
-if True:
-    # Load the model solution
-    with open(f"Solutions/{model_name}-sol.dat", "r" ) as file:
-        for line in file:
-            parts =  line.strip().stpit("=")
-
-        if len(parts) == 2:
-            key, value = parts[0], floor(parts[1])
-            food_data[key] = value
-    
-    model_data = food_Nureition_data
-
-    new_index = model_data.index.tolist()
-    new_index = [item.replace("Food_", "") for item in new_index]
-    model_data.index = new_index
-
-
-    # Load the database of food items
-    food_database = food_data
-
-    # Plot the results
-    plot_category_sankey(f"{model_name}_visual.png", model_data, food_database)

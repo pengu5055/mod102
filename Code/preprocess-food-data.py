@@ -66,14 +66,25 @@ for i, row in food_nutrient.iterrows():
         food_nutrient_expanded.loc[i, nutrient_id] = amount
     
     # Since we're already iterating, swap category with group
-    group = branded_food.loc[i, "branded_food_category"].tolist()
 
-    # Since database input is stupid values are NOT UNIQUE
-    if len(group) > 1:
-        group = most_frequent(group)
-
-    # Explicitly cast to string so DataFrame switches to object type
-    food_nutrient_expanded.loc[i, "group"] = str(group)
+    # Since database input is stupid values are NOT UNIQUE check if there
+    # are multiple categories and if so take the most frequent one
+    try:
+        group = branded_food.loc[i, "branded_food_category"].tolist()
+        if len(group) > 1:
+            group = most_frequent(group)
+    
+    except AttributeError:
+        pass
+    
+    # It is possible that the category is not in the category_to_group.map file
+    # which is strange but would mean that OpenAI did not correctly categorize 
+    try: 
+        # Explicitly cast to string so DataFrame switches to object type
+        food_nutrient_expanded.loc[i, "group"] = str(group)
+    
+    except NameError:
+        food_nutrient_expanded.loc[i, "group"] = str("Unknown")
 
 # Now add the brand_owner column but only keep the first value
 food_nutrient_expanded["brand_owner"] = food_nutrient["brand_owner"].apply(lambda x: x[0])
