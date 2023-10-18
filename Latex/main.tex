@@ -16,6 +16,7 @@
 \usepackage{minted}
 \usepackage{listings}
 \usepackage{tcolorbox}
+\usepackage[export]{adjustbox}
 \tcbuselibrary{listings, minted, skins}
 
 \newcommand{\ddd}{\mathrm{d}}
@@ -497,7 +498,9 @@ Pravzaprav trenutnotudi nobenega resource management-a ni na gruči. Resno bi se
 lotiti \texttt{Slurm}-a. \\
 
 \begin{figure}[H]
-    \includegraphics[height=0.4\textheight, left]{./astrum-dashboard.png}
+    \makebox[\textwidth][c]{%
+    \includegraphics[width=0.95\textwidth]{./astrum-dashboard.png}
+    }
     \caption{\texttt{Astrum} nodes dashboard}
     \label{fig:astrum-dash}
 \end{figure}
