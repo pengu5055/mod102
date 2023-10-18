@@ -66,7 +66,15 @@ np.savetxt(f"Solutions/{model_name}-sol.dat", solution, delimiter="\t", fmt="%s"
 
 if True:
     # Load the model solution
-    model_data = pd.read_table(f"Solutions/{model_name}-sol.dat", sep='\t', names=["Item", "Value"], skiprows=1, index_col=0)
+    with open(f"Solutions/{model_name}-sol.dat", "r" ) as file:
+        for line in file:
+            parts =  line.strip().stpit("=")
+
+        if len(parts) == 2:
+            key, value = parts[0], floor(parts[1])
+            food_data[key] = value
+    
+    model_data = food_Nureition_data
 
     new_index = model_data.index.tolist()
     new_index = [item.replace("Food_", "") for item in new_index]
