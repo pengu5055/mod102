@@ -1,13 +1,13 @@
 # Fdb version 4
-["bibtex main"] 1697637938 "main.aux" "main.bbl" "main" 1697638124 0
+["bibtex main"] 1697638457 "main.aux" "main.bbl" "main" 1697644299 0
   "./sources.bib" 1697571670 728 2e3f1d493f7064c9c60718a41ee83e4a ""
   "/usr/share/texlive/texmf-dist/bibtex/bst/base/unsrt.bst" 1684972800 18030 1376b4b231b50c66211e47e42eda2875 ""
-  "main.aux" 1697638124 7523 8fb1902996d54880e6defca33f884e95 "pdflatex"
+  "main.aux" 1697644299 7523 cdfb850a3beec7b6f32d6efff8a7af4b "pdflatex"
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1697638062 "/home/pengu5055/Documents/FMF/Year1/MA1/mod102/Latex/main.tex" "main.pdf" "main" 1697638124 0
+["pdflatex"] 1697644237 "/home/pengu5055/Documents/FMF/Year1/MA1/mod102/Latex/main.tex" "main.pdf" "main" 1697644299 0
   "../Images/diet-model_basic-add-visual.png" 1697590739 1578898 c1ff746ddaee55b5be8700b1d3b6d31f ""
   "../Images/diet-model_basic-no-weight-visual.png" 1697590252 1274064 6b4b30706312ab8c57a40d5f998e6c14 ""
   "../Images/diet-model_basic-visual.png" 1697590404 1229753 a605857513aa04545dc991c2d41b6cec ""
@@ -20,7 +20,7 @@
   "../Images/diet-model_min-fat-add-visual.png" 1697630808 1457064 ee689cc126b087648c43a24e9b78c927 ""
   "../Images/diet-model_min-fat-no-weight-visual.png" 1697630436 966262 6863aaae9164fbc7de0016e81ad4dbe2 ""
   "/dev/null" 1697372695 0 d41d8cd98f00b204e9800998ecf8427e ""
-  "/home/pengu5055/Documents/FMF/Year1/MA1/mod102/Latex/main.tex" 1697638005 20587 d02254aca6e2210ab7ce679b69571c73 ""
+  "/home/pengu5055/Documents/FMF/Year1/MA1/mod102/Latex/main.tex" 1697644236 20597 40b176ca013e6e6ba7d7c6a3a7660a6d ""
   "/usr/share/texlive/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1136849721 2900 1537cc8184ad1792082cd229ecc269f4 ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/tcrm1000.tfm" 1136768653 1536 e07581a4bb3136ece9eeb4c3ffab8233 ""
@@ -223,12 +223,12 @@
   "fbi-1.png" 1697635709 143554 d8076d2f51830b8bf97e945d8ba31c90 ""
   "fbi-2.png" 1697635696 85725 90b15feea654e7deb4f2546763315846 ""
   "logo.png" 1697060406 8303 7b15c7eec596b95d22d9e8d01528be9a ""
-  "main.aux" 1697638124 7523 8fb1902996d54880e6defca33f884e95 "pdflatex"
-  "main.bbl" 1697637938 49 0eba253fc001332e731e8aba3f23127b "bibtex main"
-  "main.listing" 1697638063 257 9be14bf69b6ce5fc383278bfe7745c86 "pdflatex"
-  "main.out" 1697638124 5024 fc8662705afaffd44e707230338d7a17 "pdflatex"
-  "main.tex" 1697638005 20587 d02254aca6e2210ab7ce679b69571c73 ""
-  "main.toc" 1697638124 2246 7a5632719373f62f464d9f9ba51caefd "pdflatex"
+  "main.aux" 1697644299 7523 cdfb850a3beec7b6f32d6efff8a7af4b "pdflatex"
+  "main.bbl" 1697638457 49 0eba253fc001332e731e8aba3f23127b "bibtex main"
+  "main.listing" 1697644238 257 9be14bf69b6ce5fc383278bfe7745c86 "pdflatex"
+  "main.out" 1697644299 5024 fc8662705afaffd44e707230338d7a17 "pdflatex"
+  "main.tex" 1697644236 20597 40b176ca013e6e6ba7d7c6a3a7660a6d ""
+  "main.toc" 1697644299 2246 c2c9714be0bb705773d375189077adab "pdflatex"
   (generated)
   "main.aux"
   "main.listing"
