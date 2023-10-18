@@ -9,7 +9,12 @@ import pandas as pd
 import cmasher as cmr
 from src import *
 
+# Parameters
+OptFat = False
+
 df = pd.read_table('Data/table.dat', sep=',', skiprows=2, index_col=0)
+
+print(df.columns.tolist())   
 
 # Create the 'prob' variable to contain the problem data
 prob = LpProblem("Diet Problem", LpMinimize)
@@ -21,18 +26,38 @@ food_items = list(df.index)
 food_vars = LpVariable.dicts("Food", food_items, lowBound=0, cat='Continuous')
 
 # Define objective function and add it to the problem
-prob += lpSum([df.loc[i, 'Energija[kcal]'] * food_vars[i] for i in food_items]), "Total energy intake per person"
+if not OptFat:
+    prob += lpSum([df.loc[i, 'Energija[kcal]'] * food_vars[i] for i in food_items]), "Total energy intake per person"
+else:
+    prob += lpSum([df.loc[i, 'Mascobe[g]'] * food_vars[i] for i in food_items]), "Total fat intake per person"
 
 # And now we can add the constraints
-prob += lpSum([df.loc[i, 'Mascobe[g]'] * food_vars[i] for i in food_items]) >= 70, "FatRequirement"
+if not OptFat:
+    prob += lpSum([df.loc[i, 'Mascobe[g]'] * food_vars[i] for i in food_items]) >= 70, "FatRequirement"
+else:
+    prob += lpSum([df.loc[i, 'Energija[kcal]'] * food_vars[i] for i in food_items]) >= 2000, "EnergyRequirement"
+
 prob += lpSum([df.loc[i, 'Ogljikovi_Hidrati[g]'] * food_vars[i] for i in food_items]) >= 310, "CarbohydrateRequirement"
 prob += lpSum([df.loc[i, 'Proteini[g]'] * food_vars[i] for i in food_items]) >= 50, "ProteinRequirement"
 prob += lpSum([df.loc[i, 'Ca[mg]'] * food_vars[i] for i in food_items]) >= 1000, "CalciumRequirement"
 prob += lpSum([df.loc[i, 'Fe[mg]'] * food_vars[i] for i in food_items]) >= 18, "IronRequirement"
-# Mass limit where the table data is nutritional value per 100g
-# prob += lpSum([100 * food_vars[i] for i in food_items]) <= 2000, "MassLimit"
 
-model_name = "diet-model_no-weight"
+# Add additional constraints
+if False:
+    prob += lpSum([df.loc[i, 'Vitamin_C[mg]'] * food_vars[i] for i in food_items]) >= 60, "VitCRequirement"
+    prob += lpSum([df.loc[i, 'Kalij[mg]'] * food_vars[i] for i in food_items]) >= 3500, "PotassiumRequirement"
+    prob += lpSum([df.loc[i, 'Natrij[mg]'] * food_vars[i] for i in food_items]) >= 500, "SodiumLowerBound"
+    prob += lpSum([df.loc[i, 'Natrij[mg]'] * food_vars[i] for i in food_items]) <= 2400, "SodiumUpperBound"
+
+# Add mass limit
+if False:
+    prob += lpSum([100 * food_vars[i] for i in food_items]) <= 2000, "MassLimit"
+
+
+model_name = "diet-model_basic"
+title = "Radenska really does give you three hearts!"
+subtext = "Basic model with additional constraints and weight limit"
+unit="kcal" # Of the objective function
 prob.writeLP(f"Models/{model_name}.lp")
 
 # Slove the problem
@@ -64,5 +89,7 @@ model_data = load_model(f"Solutions/{model_name}-sol.dat")
 # Load the database of food items
 food_data = load_database("Data/table.dat")
 
-plot_category_sankey(f"{model_name}-visual", model_data, food_data)
+plot_category_sankey(f"{model_name}-visual", model_data, food_data,
+                     title=title, subtext=subtext, opt=prob.objective,
+                     unit=unit)
 

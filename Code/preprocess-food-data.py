@@ -61,7 +61,7 @@ for i, row in food_nutrient.iterrows():
 food_nutrient_expanded["brand_owner"] = food_nutrient["brand_owner"]
 
 # Also add the category column
-food_nutrient_expanded["category"] = food_nutrient_expanded.index.map(branded_food["branded_food_category"])
+food_nutrient_expanded["category"] = food_nutrient_expanded.index.map(branded_food["branded_food_category"]).astype(str)
 
 # Now we can save the DataFrame to a file
 food_nutrient_expanded.to_hdf("Data/FoodData.h5", index=True, complevel=9, 
