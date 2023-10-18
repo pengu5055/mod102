@@ -1,4 +1,5 @@
 # Ignore due to huge file size
+.venv
 Data/FoodData*
 !Data/FoodData_processed.h5
 Models/diet-model_expanded.lp
