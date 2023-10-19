@@ -130,7 +130,7 @@ kalorije, če zahtevamo sledeče:
 \section{Opis reševanja}
 Reševanja sem se lotil v klasično v Pythonu. Pri tej nalogi je močno prišel v upoštev 
 pythonian princip, da za vse že obstaja neka knjižnica. In res je tako, za reševanje linearne 
-optimizacije obstaja knjižnica \texttt{PuLP}, ki je zelo enostavna za uporabo in ima še kar solidno 
+optimizacije obstaja knjižnica \texttt{PuLP} \cite{Mitchell2011PuLPA}, ki je zelo enostavna za uporabo in ima še kar solidno 
 dokumentacijo. Pravzaprav je njihov prvi demonstracijski zgled zelo podoben našemu, z razliko da oni
 mešajo meso v mačji hrani. Poleg tega pa seveda pridejo zraven še standardni \texttt{numpy}, \texttt{pandas}
 in tokrat zaradi malo alterative izbire vizualizacije še \texttt{holoviews}. \\
@@ -184,7 +184,8 @@ vezi. Storimo to.
 \end{pythonlst}
 
 Zdaj ko smo model tako lepo definirali je smiselno, da ga tudi spravimo v datoteko. Nato pa kličemo 
-reševanje. \texttt{PuLP} bo sam poskrbel za izbiro algoritma, ki bo najbolj primeren za naš problem.
+reševanje. \texttt{PuLP} bo sam poskrbel za izbiro algoritma, ki bo najbolj primeren za naš problem, večina 
+algoritmov je implementiranih v \texttt{COIN-OR} \cite{Forrest2023-wv} knjižnici.
 
 \begin{pythonlst}
     model_name = "diet-model_no-weight-con.lp"
@@ -525,6 +526,36 @@ dovolj, da bi jim dali dostop do nastavitev. \\
     \label{fig:astrum-temp}
 \end{figure}
 
+AH! Končno je vse skupaj predprocesirano. Sedaj pa lahko nadaljujemo z reševanjem. Po servisiranju gruče, kar mi je vzelo 
+nekaj časa (in še vedno ni vse v najboljšem stanju), je trajalo kako uro, da se je vse skupaj izračunalo. Če privzamemo, da
+bi se vse skupaj izračunalo na enem jedru in bi se čas linearno povečeval z manjšanjem števila jeder, bi trajalo torej $152$ ur 
+oz. skoraj cel teden. Torej smo z MPI \textbf{OGROMNO} pridobili. \\
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.95\textwidth]{./1h-later.png}
+    \caption{Na glavnem strežniku se v glavni niti rekombinirajo in shranjujejo podatki}
+    \label{fig:later}
+\end{figure}
+
+\subsection{Rezultati}
+Načeloma sem prosil za akademsko cloud licenco za Gurobi optimizer, ampak glede na to, da jaz rabim oddat to nalogo zdaj, 
+ne morem čakati na njihov odgovor. Tako da sem se odločil, da bom uporabil \texttt{PuLP} za modeliranje in poskusil z 
+\texttt{SCIP} reševalnikom \cite{MaherMiltenbergerPedrosoRehfeldtSchwarzSerrano2016}. Če mi ne uspe v nekem zglednem času 
+bom oddal nalogo in kot svojo zapuščino imel sprocesirano podatkovno bazo. \\
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.95\textwidth]{./end.png}
+    \caption{Dead end}
+    \label{fig:scip}
+\end{figure}
+
+Ah ja, tu se ta pot konča. Dependency, ki ga želi je na voljo le za Ubuntu $20.04$ in jaz sem na $22.04$. Sem pa našel 
+avtomatsko generacijo Gurobi licenc, le da moraš biti priključen na omrežje akademske institucije, da ti pusti generirati
+licence. K sreči imam remote dostop do mreže na Inštitutu Jožef Stefan, tako da sem lahko to naredil. Med pisanjem tega stavka
+mi je odpisal gospod iz Gurobi-ja in začel sem se pogajati za licenco. Mogoče je še upanja. Močno si želim, da si bo prof. Miha
+kljub zamudi lahko takoj ogledal nalogo. \\
 
 \section{Komentarji in izboljšave}
 

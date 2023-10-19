@@ -1,3 +1,20 @@
-\begin{thebibliography}{}
+\begin{thebibliography}{1}
+
+\bibitem{Mitchell2011PuLPA}
+Stuart Mitchell, Michael~J. O'Sullivan, and Iain Dunning.
+\newblock Pulp : A linear programming toolkit for python.
+\newblock 2011.
+
+\bibitem{Forrest2023-wv}
+John et~al. Forrest.
+\newblock {Coin-or/CBC}: Release releases/2.10.10, 2023.
+
+\bibitem{MaherMiltenbergerPedrosoRehfeldtSchwarzSerrano2016}
+Stephen Maher, Matthias Miltenberger, Jo{\~{a}}o~Pedro Pedroso, Daniel
+  Rehfeldt, Robert Schwarz, and Felipe Serrano.
+\newblock {PySCIPOpt}: Mathematical programming in python with the {SCIP}
+  optimization suite.
+\newblock In {\em Mathematical Software {\textendash} {ICMS} 2016}, pages
+  301--307. Springer International Publishing, 2016.
 
 \end{thebibliography}

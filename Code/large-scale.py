@@ -8,10 +8,10 @@ from pulp import *
 import pandas as pd
 import cmasher as cmr
 
-food_data = food_data = pd.read_hdf("Data/FoodData_processed.h5")
+food_data = food_data = pd.read_hdf("Data/FoodData_proc_v2.h5")
 
 # For DEBUG purposes take a subset of the data
-food_data = food_data.iloc[:100, :]
+# food_data = food_data.iloc[:100, :]
 
 # This is how you remember all these columns
 # print(food_data.columns.tolist())
@@ -48,7 +48,7 @@ prob.writeLP(f"Models/{model_name}.lp")
 
 # Moving to cluster computing enabled solver will is practically
 # a necessity. The default solver is too slow.
-quit()
+# quit()
 
 # Slove the problem
 prob.solve()
