@@ -1,13 +1,13 @@
 # Fdb version 4
-["bibtex main"] 1697684670 "main.aux" "main.bbl" "main" 1697684731 0
+["bibtex main"] 1697685998 "main.aux" "main.bbl" "main" 1697686064 0
   "./sources.bib" 1697674504 1676 ea7257050157d96f735fba88c635328a ""
   "/usr/share/texlive/texmf-dist/bibtex/bst/base/unsrt.bst" 1684972800 18030 1376b4b231b50c66211e47e42eda2875 ""
-  "main.aux" 1697684731 9897 b5a1c62ea2ae6753b65d5886f0449a35 "pdflatex"
+  "main.aux" 1697686064 10171 4427075f6af3dc42fedd7285fd105029 "pdflatex"
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1697684670 "/home/pengu5055/Documents/FMF/Year1/MA1/mod102/Latex/main.tex" "main.pdf" "main" 1697684731 0
+["pdflatex"] 1697685998 "/home/pengu5055/Documents/FMF/Year1/MA1/mod102/Latex/main.tex" "main.pdf" "main" 1697686064 0
   "../Images/diet-model_basic-add-visual.png" 1697590739 1578898 c1ff746ddaee55b5be8700b1d3b6d31f ""
   "../Images/diet-model_basic-no-weight-visual.png" 1697590252 1274064 6b4b30706312ab8c57a40d5f998e6c14 ""
   "../Images/diet-model_basic-visual.png" 1697590404 1229753 a605857513aa04545dc991c2d41b6cec ""
@@ -19,8 +19,9 @@
   "../Images/diet-model_min-fat-add-no-weight-visual.png" 1697630515 1516086 465063089b0e6294c435abbe51b4fbef ""
   "../Images/diet-model_min-fat-add-visual.png" 1697630808 1457064 ee689cc126b087648c43a24e9b78c927 ""
   "../Images/diet-model_min-fat-no-weight-visual.png" 1697630436 966262 6863aaae9164fbc7de0016e81ad4dbe2 ""
+  "../Images/diet-model_min-fat-visual.png" 1697630881 1493001 143a2e381f34cbce88bf91dc836a94b5 ""
   "/dev/null" 1697667820 0 d41d8cd98f00b204e9800998ecf8427e ""
-  "/home/pengu5055/Documents/FMF/Year1/MA1/mod102/Latex/main.tex" 1697684584 26815 85cfbaf57434e603b4e01ac6308d2d8e ""
+  "/home/pengu5055/Documents/FMF/Year1/MA1/mod102/Latex/main.tex" 1697685932 27054 5c175176812d0ca530134355ca7ff196 ""
   "/usr/share/texlive/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1136849721 2900 1537cc8184ad1792082cd229ecc269f4 ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/tcrm1000.tfm" 1136768653 1536 e07581a4bb3136ece9eeb4c3ffab8233 ""
@@ -237,12 +238,12 @@
   "fbi-1.png" 1697635709 143554 d8076d2f51830b8bf97e945d8ba31c90 ""
   "fbi-2.png" 1697635696 85725 90b15feea654e7deb4f2546763315846 ""
   "logo.png" 1697060406 8303 7b15c7eec596b95d22d9e8d01528be9a ""
-  "main.aux" 1697684731 9897 b5a1c62ea2ae6753b65d5886f0449a35 "pdflatex"
-  "main.bbl" 1697684670 719 075ae3a8d005a7fab4bb4ef7a6afd356 "bibtex main"
-  "main.listing" 1697684671 257 9be14bf69b6ce5fc383278bfe7745c86 "pdflatex"
-  "main.out" 1697684731 5450 2af1dc183ccce8e17cb5b9f270b6307b "pdflatex"
-  "main.tex" 1697684584 26815 85cfbaf57434e603b4e01ac6308d2d8e ""
-  "main.toc" 1697684731 2489 c92d0a5437f15cf7798a945b1654650c "pdflatex"
+  "main.aux" 1697686064 10171 4427075f6af3dc42fedd7285fd105029 "pdflatex"
+  "main.bbl" 1697685998 719 075ae3a8d005a7fab4bb4ef7a6afd356 "bibtex main"
+  "main.listing" 1697685999 257 9be14bf69b6ce5fc383278bfe7745c86 "pdflatex"
+  "main.out" 1697686064 5450 3c765cf9a919322be1515a598aaa2218 "pdflatex"
+  "main.tex" 1697685932 27054 5c175176812d0ca530134355ca7ff196 ""
+  "main.toc" 1697686064 2489 e9f64814f994269a007ed1a3e016075d "pdflatex"
   "ranks.png" 1697668821 270087 f92c455537bcfe63f413601d863d24f7 ""
   "temp.png" 1697670257 11671 b734a9af09991f05b7a4680134a2cb3f ""
   (generated)
